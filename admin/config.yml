@@ -118,6 +118,3 @@ collections:
               - {label: Subtitle, name: subtitle, widget: string}
               - {label: Image, name: image, widget: image, required: false}
               - {label: Link, name: link, widget: string}
-
-# Display options
-display_url: https://forge.lokifrak.com

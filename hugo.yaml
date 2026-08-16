@@ -11,6 +11,10 @@ params:
     instagram: https://www.instagram.com/lokifrak
     x: https://x.com/LokiFRAK
 
+caches:
+  images:
+    dir: :cacheDir/images
+
 markup:
   goldmark:
     renderer:
