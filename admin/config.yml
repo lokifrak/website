@@ -1,13 +1,6 @@
 backend:
-  name: gitlab
-  repo: lokifrak/website     # Your GitLab username or group and repo name
-  branch: main                # The branch you want to update
-  auth_type: pkce             # Enables secure, client-side OAuth
-  app_id: fe5b5b4d33b95b0b20aad1875a45f295e4f97bd005ca823d9d02417ea39c8da6 # Paste your GitLab Application ID here
-
-  # Optional: Add these only if you are using a Self-Hosted GitLab instance
-  api_root: https://forge.lokifrak.com/api/v4  # Replace with your GitLab instance API root
-  base_url: https://forge.lokifrak.com
+  name: github
+  repo: lokifrak/website     # Your GitHub username or group and repo name
 
 # Media configuration
 media_folder: "uploads"
