@@ -1,0 +1,401 @@
+{{ define "main" }}
+{{ $heroes := hugo.Data.hero }}
+{{ $works := first 3 (sort (where site.RegularPages "Section" "works") "Date" "desc") }}
+{{ $posts := first 3 (sort (where site.RegularPages "Section" "posts") "Date" "desc") }}
+
+<section class="container mx-auto px-4 py-12 md:py-16">
+    <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3 flex-wrap">
+            <button type="button" class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-100 dark:border-cyan-400/30 dark:text-cyan-100 dark:hover:bg-gray-800 transition" data-hero-toggle>
+                <span aria-live="polite" data-hero-toggle-label>Pause autoplay</span>
+            </button>
+            <div class="inline-flex shadow-sm rounded-md overflow-hidden border border-gray-200 dark:border-cyan-400/30">
+                <button type="button" class="px-3 py-2 bg-white hover:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 text-gray-700 dark:text-cyan-100" aria-label="Previous hero" data-hero-prev>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+                </button>
+                <button type="button" class="px-3 py-2 bg-white hover:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 text-gray-700 dark:text-cyan-100 border-l border-gray-200 dark:border-cyan-400/30" aria-label="Next hero" data-hero-next>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    {{ with $heroes }}
+    <div id="hero-carousel" class="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-cyan-400/30 shadow-lg h-[400px] md:h-[560px] bg-gray-50 dark:bg-gray-900" role="region" aria-roledescription="carousel" aria-label="Featured content carousel">
+        <div class="carousel-track flex h-full transition-transform duration-700 ease-in-out" style="transform: translateX(0%);">
+            {{ range $index, $hero := .items }}
+            {{- $heroLink := $hero.link | default "#" -}}
+            {{- $heroHref := cond (or (eq $heroLink "#") (strings.HasPrefix $heroLink "#")) $heroLink ($heroLink | relURL) -}}
+            <div class="carousel-slide flex-shrink-0 w-full h-full relative" 
+                 data-slide-index="{{ $index }}"
+                 role="group"
+                 aria-roledescription="slide"
+                 aria-label="Slide {{ add $index 1 }} of {{ len $heroes.items }}">
+                {{ if ne $heroHref "#" }}
+                <a href="{{ $heroHref }}" class="block h-full w-full focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 rounded-xl" tabindex="{{ if eq $index 0 }}0{{ else }}-1{{ end }}">
+                {{ end }}
+                    <div class="relative h-full w-full">
+                        {{- $imgSrc := $hero.image -}}
+                        <img src="{{ $imgSrc }}" alt="{{ $hero.title }}" class="w-full h-full object-cover" loading="{{ if eq $index 0 }}eager{{ else }}lazy{{ end }}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 flex flex-col gap-3 text-white">
+                            <h2 class="text-3xl md:text-4xl font-bold drop-shadow-lg">{{ $hero.title }}</h2>
+                            {{ with $hero.subtitle }}<span class="text-sm md:text-base px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 w-fit">{{ . }}</span>{{ end }}
+                        </div>
+                    </div>
+                {{ if ne $heroHref "#" }}
+                </a>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+        
+        <!-- Progress indicators -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10" role="tablist" aria-label="Carousel slides">
+            {{ range $index, $hero := .items }}
+            <button type="button" 
+                    class="carousel-indicator w-2 h-2 rounded-full transition-all duration-300 {{ if eq $index 0 }}bg-white w-8{{ else }}bg-white/50 hover:bg-white/75{{ end }}"
+                    data-slide-to="{{ $index }}"
+                    role="tab"
+                    aria-label="Go to slide {{ add $index 1 }}"
+                    aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
+                    aria-controls="carousel-slide-{{ $index }}">
+            </button>
+            {{ end }}
+        </div>
+    </div>
+    {{ end }}
+</section>
+
+<section class="container mx-auto px-4 py-12 md:py-16">
+    <div class="flex items-center justify-between gap-4 mb-6">
+        <div>
+            <p class="text-sm uppercase tracking-wide text-cyan-500 dark:text-cyan-300">Latest works</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-cyan-200">Fresh off the drawing board</h2>
+        </div>
+    </div>
+    {{ if $works }}
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {{ range $works }}
+            {{ $desc := (default "" .Params.description | plainify | truncate 150) }}
+            <article class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-cyan-400/30 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+                <div class="relative aspect-[4/3] overflow-hidden">
+                    {{ with .Params.image }}
+                        {{- $imgSrc := . -}}
+                        <img src="{{ $imgSrc }}" alt="{{ $.Title }} cover" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                    {{ else }}
+                        <div class="w-full h-full bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900/40 dark:to-blue-900/30"></div>
+                    {{ end }}
+                </div>
+                <div class="p-5 flex flex-col gap-3 flex-1">
+                    <div class="flex items-center gap-2 text-xs uppercase tracking-wide text-cyan-600 dark:text-cyan-300">
+                        {{ $seriesTerms := .GetTerms "series" }}
+                        {{ if $seriesTerms }}
+                            {{ range $seriesTerms }}
+                                <a class="hover:underline" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                            {{ end }}
+                        {{ else }}
+                            {{ with .Params.series }}
+                                {{ range . }}
+                                    <a class="hover:underline" href="{{ printf "/series/%s/" (urlize .) | relURL }}">{{ . }}</a>
+                                {{ end }}
+                            {{ end }}
+                        {{ end }}
+                        {{ with .Params.genres }}{{ range . }}<a href="{{ printf "/genres/%s/" (urlize .) | relURL }}" class="px-2 py-1 rounded-full bg-cyan-100 text-cyan-800 dark:bg-cyan-900/50 dark:text-cyan-100 hover:bg-cyan-200 dark:hover:bg-cyan-800 transition">{{ . }}</a>{{ end }}{{ end }}
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-cyan-100">
+                        <a href="{{ .RelPermalink }}" class="hover:text-cyan-600 dark:hover:text-cyan-200 transition">{{ .Title }}</a>
+                    </h3>
+                    <p class="text-sm text-gray-700 dark:text-gray-200/90 leading-relaxed">{{ $desc }}</p>
+                    <div class="mt-auto flex items-center justify-between text-sm text-gray-500 dark:text-gray-300">
+                        <span>{{ .Date.Format "Jan 2, 2006" }}</span>
+                        <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-1 text-cyan-700 dark:text-cyan-200 hover:underline">Read work
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="m9 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {{ end }}
+        </div>
+    {{ else }}
+        <p class="text-gray-600 dark:text-gray-200">No works published yet. Add entries under <code>content/works</code> to see them here.</p>
+    {{ end }}
+</section>
+
+<section class="container mx-auto px-4 py-12 md:py-16">
+    <div class="flex items-center justify-between gap-4 mb-6">
+        <div>
+            <p class="text-sm uppercase tracking-wide text-cyan-500 dark:text-cyan-300">Latest articles</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-cyan-200">From the blog</h2>
+        </div>
+        <a href="{{ relURL "/posts" }}" class="inline-flex items-center gap-2 text-cyan-700 dark:text-cyan-100 hover:underline">View archive
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="m9 5 7 7-7 7"/></svg>
+        </a>
+    </div>
+    {{ if $posts }}
+        <div class="grid gap-6 md:grid-cols-3">
+            {{ range $posts }}
+            <article class="h-full flex flex-col gap-3 p-5 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-cyan-400/30 shadow-sm">
+                <div class="text-sm text-gray-500 dark:text-gray-300 flex items-center justify-between">
+                    <span>{{ .Date.Format "Jan 2, 2006" }}</span>
+                    {{ with .Params.categories }}<span class="px-2 py-1 rounded-full bg-cyan-100 text-cyan-800 dark:bg-cyan-900/50 dark:text-cyan-100 text-xs">{{ delimit . ", " }}</span>{{ end }}
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-cyan-100">
+                    <a href="{{ .RelPermalink }}" class="hover:text-cyan-600 dark:hover:text-cyan-200 transition">{{ .Title }}</a>
+                </h3>
+                <p class="text-sm text-gray-700 dark:text-gray-200/90 leading-relaxed">{{ .Summary | plainify | truncate 140 }}</p>
+                <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-2 text-cyan-700 dark:text-cyan-100 hover:underline">Read article
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="m9 5 7 7-7 7"/></svg>
+                </a>
+            </article>
+            {{ end }}
+        </div>
+    {{ else }}
+        <p class="text-gray-600 dark:text-gray-200">No blog posts yet. Add entries under <code>content/posts</code> to see them here.</p>
+    {{ end }}
+</section>
+
+{{ if .Content }}
+<section class="container mx-auto px-4 pb-16">
+    <div class="prose prose-lg dark:prose-invert max-w-4xl">
+        {{ .Content }}
+    </div>
+</section>
+{{ end }}
+
+<script>
+(function() {
+    'use strict';
+    
+    // Hero Carousel Module
+    class HeroCarousel {
+        constructor(element) {
+            this.carousel = element;
+            this.track = element.querySelector('.carousel-track');
+            this.slides = Array.from(element.querySelectorAll('.carousel-slide'));
+            this.indicators = Array.from(element.querySelectorAll('.carousel-indicator'));
+            this.prevBtn = document.querySelector('[data-hero-prev]');
+            this.nextBtn = document.querySelector('[data-hero-next]');
+            this.toggleBtn = document.querySelector('[data-hero-toggle]');
+            this.toggleLabel = document.querySelector('[data-hero-toggle-label]');
+            
+            this.currentIndex = 0;
+            this.isPaused = false;
+            this.autoplayInterval = null;
+            this.autoplayDelay = 6000;
+            this.touchStartX = 0;
+            this.touchEndX = 0;
+            this.isTransitioning = false;
+            
+            if (this.slides.length <= 1) return;
+            
+            this.init();
+        }
+        
+        init() {
+            this.setupEventListeners();
+            this.startAutoplay();
+            this.updateToggleLabel();
+            this.updateAccessibility();
+        }
+        
+        setupEventListeners() {
+            // Navigation buttons
+            this.prevBtn?.addEventListener('click', () => this.goToPrevious());
+            this.nextBtn?.addEventListener('click', () => this.goToNext());
+            this.toggleBtn?.addEventListener('click', () => this.toggleAutoplay());
+            
+            // Indicator dots
+            this.indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => this.goToSlide(index));
+            });
+            
+            // Keyboard navigation
+            this.carousel.addEventListener('keydown', (e) => this.handleKeyboard(e));
+            
+            // Pause on hover
+            this.carousel.addEventListener('mouseenter', () => this.pause());
+            this.carousel.addEventListener('mouseleave', () => this.resume());
+            
+            // Touch/swipe support
+            this.carousel.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+            this.carousel.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: true });
+            
+            // Pause when visibility changes
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    this.pause();
+                } else if (!this.isPaused) {
+                    this.resume();
+                }
+            });
+            
+            // Handle transition end
+            this.track?.addEventListener('transitionend', () => {
+                this.isTransitioning = false;
+            });
+        }
+        
+        goToSlide(index) {
+            if (this.isTransitioning || index === this.currentIndex || index < 0 || index >= this.slides.length) return;
+            
+            this.isTransitioning = true;
+            this.currentIndex = index;
+            
+            // Calculate transform percentage
+            const translateX = -this.currentIndex * 100;
+            if (this.track) {
+                this.track.style.transform = `translateX(${translateX}%)`;
+            }
+            
+            // Update indicators
+            this.updateIndicators();
+            
+            // Update accessibility
+            this.updateAccessibility();
+            
+            // Announce to screen readers
+            this.announceSlideChange();
+        }
+        
+        updateIndicators() {
+            this.indicators.forEach((indicator, i) => {
+                const isActive = i === this.currentIndex;
+                indicator.classList.toggle('bg-white', isActive);
+                indicator.classList.toggle('w-8', isActive);
+                indicator.classList.toggle('bg-white/50', !isActive);
+                indicator.setAttribute('aria-selected', isActive.toString());
+            });
+        }
+        
+        updateAccessibility() {
+            this.slides.forEach((slide, i) => {
+                const link = slide.querySelector('a');
+                const isActive = i === this.currentIndex;
+                
+                if (link) {
+                    link.tabIndex = isActive ? 0 : -1;
+                }
+            });
+        }
+        
+        goToNext() {
+            this.pauseAutoplay();
+            const nextIndex = (this.currentIndex + 1) % this.slides.length;
+            this.goToSlide(nextIndex);
+        }
+        
+        goToPrevious() {
+            this.pauseAutoplay();
+            const prevIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+            this.goToSlide(prevIndex);
+        }
+        
+        handleKeyboard(e) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    this.goToPrevious();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    this.goToNext();
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    this.goToSlide(0);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    this.goToSlide(this.slides.length - 1);
+                    break;
+            }
+        }
+        
+        handleTouchStart(e) {
+            this.touchStartX = e.changedTouches[0].screenX;
+        }
+        
+        handleTouchEnd(e) {
+            this.touchEndX = e.changedTouches[0].screenX;
+            this.handleSwipe();
+        }
+        
+        handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = this.touchStartX - this.touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    this.goToNext();
+                } else {
+                    this.goToPrevious();
+                }
+            }
+        }
+        
+        startAutoplay() {
+            if (this.autoplayInterval) return;
+            this.autoplayInterval = setInterval(() => {
+                if (!this.isPaused) {
+                    this.goToNext();
+                }
+            }, this.autoplayDelay);
+        }
+        
+        stopAutoplay() {
+            if (this.autoplayInterval) {
+                clearInterval(this.autoplayInterval);
+                this.autoplayInterval = null;
+            }
+        }
+        
+        pause() {
+            this.isPaused = true;
+            this.updateToggleLabel();
+        }
+        
+        resume() {
+            this.isPaused = false;
+            this.updateToggleLabel();
+        }
+        
+        pauseAutoplay() {
+            this.isPaused = true;
+            this.updateToggleLabel();
+        }
+        
+        toggleAutoplay() {
+            this.isPaused = !this.isPaused;
+            this.updateToggleLabel();
+        }
+        
+        updateToggleLabel() {
+            if (this.toggleLabel) {
+                this.toggleLabel.textContent = this.isPaused ? 'Resume autoplay' : 'Pause autoplay';
+            }
+        }
+        
+        announceSlideChange() {
+            // Create or update live region for screen reader announcements
+            let liveRegion = document.getElementById('carousel-live-region');
+            if (!liveRegion) {
+                liveRegion = document.createElement('div');
+                liveRegion.id = 'carousel-live-region';
+                liveRegion.className = 'sr-only';
+                liveRegion.setAttribute('aria-live', 'polite');
+                liveRegion.setAttribute('aria-atomic', 'true');
+                document.body.appendChild(liveRegion);
+            }
+            liveRegion.textContent = `Slide ${this.currentIndex + 1} of ${this.slides.length}`;
+        }
+    }
+    
+    // Initialize carousel when DOM is ready
+    const carousel = document.getElementById('hero-carousel');
+    if (carousel) {
+        new HeroCarousel(carousel);
+    }
+})();
+</script>
+{{ end }}

@@ -1,0 +1,20 @@
+{{ define "main" }}
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <section class="prose dark:prose-invert dark:prose-headings:text-cyan-300 dark:prose-headings:glow-cyan dark:prose-a:text-cyan-400 dark:prose-a:hover:text-cyan-300 dark:prose-code:text-purple-300 dark:prose-code:bg-purple-900/20 dark:prose-pre:bg-gray-900/50 dark:prose-pre:border dark:prose-pre:border-cyan-400/20 dark:prose-strong:text-cyan-200 dark:prose-em:text-blue-300 dark:prose-hr:border-cyan-400/30">
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+        
+        {{ range .Pages }}
+        <article class="my-8">
+            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+            {{ if .Date }}
+            <time class="text-sm opacity-75">{{ .Date.Format "January 2, 2006" }}</time>
+            {{ end }}
+            {{ if .Summary }}
+            <p>{{ .Summary }}</p>
+            {{ end }}
+        </article>
+        {{ end }}
+    </section>
+</div>
+{{ end }}

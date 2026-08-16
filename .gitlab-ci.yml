@@ -1,0 +1,87 @@
+# =============================================================================
+# GitLab CI/CD — PanelFRAK Hugo Website
+# =============================================================================
+#
+# Builds the Hugo site and deploys to a remote server via rsync + SSH.
+#
+# Required CI/CD variables (set in GitLab → Settings → CI/CD → Variables):
+#   SSH_USER          — SSH username on the target server
+#   SSH_PASSWORD      — SSH password (masked; used via sshpass)
+#   SSH_HOST          — Hostname or IP of the target server
+# =============================================================================
+
+stages:
+  - build
+  - deploy
+
+# ---------------------------------------------------------------------------
+# Shared settings
+# ---------------------------------------------------------------------------
+.defaults:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
+.hugo_cache: &hugo_cache
+  key: hugo-cache
+  paths:
+    - /tmp/hugo_cache/
+    - /tmp/hugo_modules/
+
+# ---------------------------------------------------------------------------
+# Build — compiles the Hugo site
+# ---------------------------------------------------------------------------
+build:
+  stage: build
+  image: node:22-alpine
+  extends: .defaults
+  cache:
+    - <<: *hugo_cache
+    - key: npm-cache
+      paths:
+        - node_modules/
+  before_script:
+    # Install Hugo Extended from Alpine community repo
+    - apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community hugo
+    - hugo version
+  script:
+    - npm install
+    - hugo --minify --gc
+  artifacts:
+    paths:
+      - public/
+    expire_in: 1h
+
+# ---------------------------------------------------------------------------
+# Deploy — rsync public/ to the web server
+# ---------------------------------------------------------------------------
+deploy:
+  stage: deploy
+  image: alpine:latest
+  extends: .defaults
+  needs:
+    - build
+  before_script:
+    - apk add --no-cache openssh-client rsync sshpass
+    - export SSHPASS="$SSH_PASSWORD"
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+    # Create a sudo askpass helper on the remote server.
+    # sudo -A uses this instead of reading the password from stdin,
+    # which keeps rsync's protocol stream clean.
+    - >
+      sshpass -e ssh -o ConnectTimeout=10 "${SSH_USER}@${SSH_HOST}"
+      "echo '${SSH_PASSWORD}' > /tmp/.deploy_pass &&
+       chmod 600 /tmp/.deploy_pass &&
+       printf '#!/bin/sh\ncat /tmp/.deploy_pass\n' > /tmp/.deploy_askpass &&
+       chmod 700 /tmp/.deploy_askpass"
+  script:
+    - >
+      sshpass -e rsync -avz --delete
+      --rsync-path="SUDO_ASKPASS=/tmp/.deploy_askpass sudo -A rsync"
+      -e "ssh -o ConnectTimeout=10"
+      public/ "${SSH_USER}@${SSH_HOST}:/var/www/my_webapp/www/"
+  after_script:
+    # Clean up the temporary sudo helper files
+    - >
+      sshpass -e ssh -o ConnectTimeout=10 "${SSH_USER}@${SSH_HOST}"
+      "rm -f /tmp/.deploy_pass /tmp/.deploy_askpass"

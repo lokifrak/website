@@ -1,0 +1,130 @@
+{{ define "main" }}
+<div class="container mx-auto px-4 py-12 max-w-4xl">
+    <!-- Taxonomy Header -->
+    <header class="mb-12">
+        <div class="mb-4">
+            <span class="text-sm font-semibold uppercase text-gray-600 dark:text-gray-400">
+                {{ humanize .Data.Singular }}
+            </span>
+        </div>
+        <h1 class="text-4xl font-bold mb-4 dark:text-cyan-300">{{ .Title }}</h1>
+        
+        {{ if .Description }}
+            <p class="text-lg text-gray-700 dark:text-gray-300">{{ .Description }}</p>
+        {{ end }}
+    </header>
+
+    <!-- Taxonomy Pages Count -->
+    <div class="mb-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+        <p class="text-gray-700 dark:text-gray-300">
+            <span class="font-semibold">{{ len .Pages }}</span> 
+            {{ if eq (len .Pages) 1 }}
+                item
+            {{ else }}
+                items
+            {{ end }}
+            in this {{ humanize .Data.Singular }}
+        </p>
+    </div>
+
+    <!-- Pages List -->
+    {{ $paginator := .Paginate .Pages }}
+    
+    <div class="space-y-8 mb-12">
+        {{ range $paginator.Pages }}
+            <article class="pb-8 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                <div class="group">
+                    <h2 class="text-2xl font-bold mb-2 dark:text-cyan-300">
+                        <a href="{{ .RelPermalink }}" class="hover:underline dark:hover:text-cyan-200 transition">
+                            {{ .Title }}
+                        </a>
+                    </h2>
+
+                    <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
+                        {{ if .Params.author }}
+                            <span class="flex items-center gap-2">
+                                <span class="font-semibold">By</span> {{ .Params.author }}
+                            </span>
+                        {{ end }}
+                        
+                        {{ if .Date }}
+                            <span class="flex items-center gap-2">
+                                <time datetime="{{ .Date.Format `2006-01-02T15:04:05Z07:00` }}">
+                                    {{ .Date.Format "January 2, 2006" }}
+                                </time>
+                            </span>
+                        {{ end }}
+                    </div>
+
+                    {{ if eq .Section "posts" }}
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">{{ .Summary }}</p>
+                    {{ else }}
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}</p>
+                    {{ end }}
+
+                    {{ if or .Params.categories .Params.tags }}
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            {{ range .Params.categories }}
+                                <a href="{{ printf "/categories/%s" (. | lower) }}" class="inline-block px-2 py-1 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 rounded transition">
+                                    {{ . }}
+                                </a>
+                            {{ end }}
+                            
+                            {{ range .Params.tags }}
+                                <a href="{{ printf "/tags/%s" (. | lower) }}" class="inline-block px-2 py-1 text-xs font-semibold text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-600 rounded transition">
+                                    #{{ . }}
+                                </a>
+                            {{ end }}
+                        </div>
+                    {{ end }}
+
+                    <a href="{{ .RelPermalink }}" class="inline-block px-4 py-2 text-sm font-semibold text-white bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 rounded transition">
+                        Read More →
+                    </a>
+                </div>
+            </article>
+        {{ end }}
+    </div>
+
+    <!-- Pagination -->
+    {{ if gt $paginator.TotalPages 1 }}
+        <nav class="flex justify-center items-center gap-4 py-8">
+            {{ if $paginator.HasPrev }}
+                <a href="{{ $paginator.Prev.URL }}" class="px-4 py-2 text-sm font-semibold bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                    ← Previous
+                </a>
+            {{ end }}
+
+            <div class="text-sm text-gray-600 dark:text-gray-400">
+                Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}
+            </div>
+
+            {{ if $paginator.HasNext }}
+                <a href="{{ $paginator.Next.URL }}" class="px-4 py-2 text-sm font-semibold bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                    Next →
+                </a>
+            {{ end }}
+        </nav>
+    {{ end }}
+
+    <!-- Related Taxonomies Links -->
+    <section class="mt-16 pt-8 border-t border-gray-300 dark:border-gray-700">
+        <h3 class="text-lg font-semibold mb-6 dark:text-cyan-300">Other {{ humanize .Data.Plural }}</h3>
+
+        {{ $taxonomy := index .Site.Taxonomies .Section }}
+        {{ if $taxonomy }}
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                {{ range $name, $items := $taxonomy }}
+                    {{ with $items.Page }}
+                        {{ if ne .RelPermalink $.RelPermalink }}
+                            <a href="{{ .RelPermalink }}" class="px-4 py-2 text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                                {{ if eq $.Data.Singular "tag" }}#{{ end }}{{ $name }} <span class="text-xs ml-1">({{ len $items }})</span>
+                            </a>
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+            </div>
+        {{ end }}
+    </section>
+</div>
+{{ end }}

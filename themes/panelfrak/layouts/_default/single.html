@@ -1,0 +1,6 @@
+{{ define "main" }}
+<article class="container mx-auto px-4 py-8 prose dark:prose-invert dark:prose-headings:text-cyan-300 dark:prose-headings:glow-cyan dark:prose-a:text-cyan-400 dark:prose-a:hover:text-cyan-300 dark:prose-code:text-purple-300 dark:prose-code:bg-purple-900/20 dark:prose-pre:bg-gray-900/50 dark:prose-pre:border dark:prose-pre:border-cyan-400/20 dark:prose-strong:text-cyan-200 dark:prose-em:text-blue-300 dark:prose-hr:border-cyan-400/30 max-w-4xl">
+    <h1 class="title">{{ .Title }}</h1>
+    {{ .Content }}
+</article>
+{{ end }}

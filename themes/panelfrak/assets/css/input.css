@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
+@import "tailwindcss";
+@custom-variant dark (.dark &);
+@plugin "@tailwindcss/typography";
+@source "hugo_stats.json";
+
+@theme {
+    --font-sans: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+@layer base {
+    :root { color-scheme: light; }
+    .dark { color-scheme: dark; }
+    body { @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-cyan-50; }
+}
+
+@layer utilities {
+    /* Glow effect utilities for sci-fi theme */
+    .glow-cyan { text-shadow: 0 0 10px rgba(34, 211, 238, 0.8), 0 0 20px rgba(34, 211, 238, 0.4); }
+    .glow-blue { text-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4); }
+    .glow-purple { text-shadow: 0 0 10px rgba(168, 85, 247, 0.8), 0 0 20px rgba(168, 85, 247, 0.4); }
+    .border-glow-cyan { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 0 15px rgba(34, 211, 238, 0.3) inset; }
+    .border-glow-blue { border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 0 15px rgba(59, 130, 246, 0.3) inset; }
+    .bg-glow-cyan { background-color: rgba(34, 211, 238, 0.05); border-color: rgba(34, 211, 238, 0.3); }
+}
+
+@layer components {
+    h1 {
+        @apply text-4xl mt-6 mb-2 font-heading;
+    }
+
+    h2 {
+        @apply text-3xl mt-6 mb-2 font-heading;
+    }
+
+    h3 {
+        @apply text-2xl mt-6 mb-2 font-heading dark:text-cyan-400;
+    }
+
+    h4 {
+        @apply text-xl mt-6 mb-2 font-heading dark:text-blue-400;
+    }
+
+    h5 {
+        @apply text-lg mt-6 mb-2 font-heading dark:text-purple-400;
+    }
+
+    h6 {
+        @apply text-base mt-6 mb-2 font-heading font-semibold dark:text-cyan-300;
+    }
+
+    .title {
+        @apply text-5xl font-heading font-semibold mb-4 dark:text-cyan-300;
+    }
+
+    .dark h1,
+    .dark .title {
+        text-shadow: 0 0 10px rgba(34, 211, 238, 0.8), 0 0 20px rgba(34, 211, 238, 0.4);
+    }
+
+    .dark h2 {
+        text-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Sci-fi link styling */
+    a { @apply text-blue-600 hover:text-blue-800 underline dark:text-cyan-400 dark:hover:text-cyan-300; }
+
+    /* Navigation sci-fi styling */
+    nav a { @apply text-gray-700 dark:text-cyan-300 no-underline hover:text-gray-900 dark:hover:text-cyan-100 transition-colors duration-200; }
+
+    nav a.active {
+        @apply font-semibold dark:text-cyan-400;
+    }
+}

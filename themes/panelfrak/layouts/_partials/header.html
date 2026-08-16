@@ -1,0 +1,108 @@
+<style>
+    [x-cloak] { display: none !important; }
+    @media (max-width: 768px) {
+        nav a { padding: 0.25rem 0; }
+    }
+    /* Sci-fi header styling */
+    header { border-bottom: 2px solid rgba(34, 211, 238, 0.3); }
+    .dark header { box-shadow: 0 4px 20px rgba(34, 211, 238, 0.1); }
+    .dark a.glow-title { text-shadow: 0 0 10px rgba(34, 211, 238, 0.8), 0 0 20px rgba(34, 211, 238, 0.4); }
+</style>
+<header x-data="{ open: false }" @keydown.escape.window="open = false">
+    <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center justify-between w-full md:w-auto">
+            <a href="{{ .Site.BaseURL }}" class="text-2xl font-bold dark:text-cyan-300 glow-title hover:text-blue-600 dark:hover:text-cyan-100 transition-colors duration-200">{{ .Site.Title }}</a>
+            <button
+                class="md:hidden inline-flex items-center justify-center p-2 rounded dark:text-cyan-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-cyan-100 focus:outline-none focus:ring-2 focus:ring-cyan-400 dark:focus:ring-cyan-300 transition-colors duration-200"
+                @click="open = !open"
+                :aria-expanded="open.toString()"
+                aria-controls="main-menu"
+                aria-label="Toggle navigation">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <ul id="main-menu" class="hidden md:flex items-center gap-6">
+        {{ range .Site.Menus.main }}
+            {{ $href := .URL }}
+            {{ if not $href }}{{ $href = relLangURL .PageRef }}{{ end }}
+            <li class="relative" x-data="{ dd: false }" @mouseenter="dd = true" @mouseleave="dd = false" @focusin="dd = true" @focusout="dd = false">
+                {{ if .HasChildren }}
+                <button type="button" class="dark:text-cyan-300 dark:hover:text-cyan-100 hover:text-blue-600 inline-flex items-center gap-2 bg-transparent border-0 p-0 cursor-pointer transition-colors duration-200" :aria-expanded="dd.toString()" aria-haspopup="true">
+                    <span>{{ .Name }}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.25a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"/></svg>
+                </button>
+                <ul class="absolute right-0 mt-2 w-48 rounded-md bg-white dark:bg-gray-900 dark:border dark:border-cyan-400/30 shadow-lg dark:shadow-cyan-500/10 py-2 z-20" x-show="dd" x-transition x-cloak @keydown.escape.window="dd = false">
+                {{ range .Children }}
+                    {{ $childHref := .URL }}
+                    {{ if not $childHref }}{{ $childHref = relLangURL .PageRef }}{{ end }}
+                    <li><a href="{{ $childHref }}" class="block px-4 py-2 dark:text-cyan-300 dark:hover:text-cyan-100 dark:hover:bg-gray-800 hover:bg-gray-100 transition-colors duration-200">{{ .Name }}</a></li>
+                {{ end }}
+                </ul>
+                {{ else }}
+                <a href="{{ $href }}" class="dark:text-cyan-300 dark:hover:text-cyan-100 dark:hover:glow-cyan hover:text-blue-600 inline-flex items-center gap-2 transition-colors duration-200" :aria-expanded="dd.toString()">
+                    <span>{{ .Name }}</span>
+                </a>
+                {{ end }}
+            </li>
+        {{ end }}
+            <li class="relative" x-data="{ themeOpen: false, current: window.__getTheme() }" @theme-updated.window="current = $event.detail" @click.outside="themeOpen = false" @keydown.escape.window="themeOpen = false">
+                <button type="button" class="inline-flex items-center gap-2 px-3 py-2 rounded-md dark:bg-cyan-900/20 dark:border dark:border-cyan-400/30 dark:text-cyan-300 dark:hover:bg-cyan-900/30 dark:hover:text-cyan-100 bg-gray-100 hover:bg-gray-200 focus:outline-none transition-colors duration-200" @click="themeOpen = !themeOpen" :aria-expanded="themeOpen.toString()" aria-haspopup="true" aria-label="Select theme">
+                    <span class="fa-solid fa-sun" x-show="current === 'light'"></span>
+                    <span class="fa-solid fa-moon" x-show="current === 'dark'"></span>
+                    <span class="fa-solid fa-circle-half-stroke" x-show="current === 'system'"></span>
+                    <span id="theme-mode" class="text-sm" x-text="current.charAt(0).toUpperCase() + current.slice(1)"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform duration-200" :class="themeOpen ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.25a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"/></svg>
+                </button>
+                <ul class="absolute right-0 mt-2 w-36 rounded-md bg-white dark:bg-gray-900 dark:border dark:border-cyan-400/30 shadow-lg dark:shadow-cyan-500/10 py-1 z-20" x-show="themeOpen" x-transition x-cloak>
+                    <li><button type="button" class="w-full text-left px-4 py-2 flex items-center gap-3 dark:text-cyan-300 dark:hover:text-cyan-100 dark:hover:bg-gray-800 hover:bg-gray-100 transition-colors duration-200" @click="window.__setTheme('light'); themeOpen = false; $dispatch('theme-updated', 'light')"><span class="fa-solid fa-sun w-4 text-center"></span> Light</button></li>
+                    <li><button type="button" class="w-full text-left px-4 py-2 flex items-center gap-3 dark:text-cyan-300 dark:hover:text-cyan-100 dark:hover:bg-gray-800 hover:bg-gray-100 transition-colors duration-200" @click="window.__setTheme('dark'); themeOpen = false; $dispatch('theme-updated', 'dark')"><span class="fa-solid fa-moon w-4 text-center"></span> Dark</button></li>
+                    <li><button type="button" class="w-full text-left px-4 py-2 flex items-center gap-3 dark:text-cyan-300 dark:hover:text-cyan-100 dark:hover:bg-gray-800 hover:bg-gray-100 transition-colors duration-200" @click="window.__setTheme('system'); themeOpen = false; $dispatch('theme-updated', 'system')"><span class="fa-solid fa-circle-half-stroke w-4 text-center"></span> System</button></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="md:hidden container mx-auto px-4 mt-2" x-show="open" x-transition x-cloak @click.outside="open = false">
+        <ul class="flex flex-col gap-3 px-4 py-4 mb-4 rounded-lg shadow-sm bg-white dark:bg-gray-800">
+        {{ range .Site.Menus.main }}
+            {{ $href := .URL }}
+            {{ if not $href }}{{ $href = relLangURL .PageRef }}{{ end }}
+            <li x-data="{ dd: false }">
+                {{ if .HasChildren }}
+                <div class="flex items-center justify-between py-1 cursor-pointer" @click="dd = !dd">
+                    <span class="flex-1 py-2 text-base font-medium text-gray-700 dark:text-gray-200">{{ .Name }}</span>
+                    <button class="p-2 inline-flex items-center justify-center rounded hover:bg-gray-100 dark:hover:bg-gray-700" :aria-expanded="dd.toString()" aria-label="Toggle submenu">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.25a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"/></svg>
+                    </button>
+                </div>
+                <ul class="mt-2 pl-4 space-y-2" x-show="dd" x-transition x-cloak>
+                {{ range .Children }}
+                    {{ $childHref := .URL }}
+                    {{ if not $childHref }}{{ $childHref = relLangURL .PageRef }}{{ end }}
+                    <li><a href="{{ $childHref }}" class="block py-1 text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white no-underline">{{ .Name }}</a></li>
+                {{ end }}
+                </ul>
+                {{ else }}
+                <a href="{{ $href }}" class="flex items-center py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white no-underline">{{ .Name }}</a>
+                {{ end }}
+            </li>
+        {{ end }}
+            <li class="relative" x-data="{ themeOpenM: false, currentM: window.__getTheme() }" @theme-updated.window="currentM = $event.detail" @click.outside="themeOpenM = false" @keydown.escape.window="themeOpenM = false">
+                <button type="button" class="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 w-full justify-center" @click="themeOpenM = !themeOpenM" :aria-expanded="themeOpenM.toString()" aria-haspopup="true" aria-label="Select theme">
+                    <span class="fa-solid fa-sun" x-show="currentM === 'light'"></span>
+                    <span class="fa-solid fa-moon" x-show="currentM === 'dark'"></span>
+                    <span class="fa-solid fa-circle-half-stroke" x-show="currentM === 'system'"></span>
+                    <span class="text-sm" x-text="currentM.charAt(0).toUpperCase() + currentM.slice(1)"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform duration-200" :class="themeOpenM ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.25a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"/></svg>
+                </button>
+                <ul class="absolute right-0 mt-2 w-36 rounded-md bg-white dark:bg-gray-900 dark:border dark:border-cyan-400/30 shadow-lg dark:shadow-cyan-500/10 py-1 z-20" x-show="themeOpenM" x-transition x-cloak>
+                    <li><button type="button" class="w-full text-left px-4 py-2 flex items-center gap-3 dark:text-cyan-300 dark:hover:text-cyan-100 dark:hover:bg-gray-800 hover:bg-gray-100 transition-colors duration-200" @click="window.__setTheme('light'); themeOpenM = false; $dispatch('theme-updated', 'light')"><span class="fa-solid fa-sun w-4 text-center"></span> Light</button></li>
+                    <li><button type="button" class="w-full text-left px-4 py-2 flex items-center gap-3 dark:text-cyan-300 dark:hover:text-cyan-100 dark:hover:bg-gray-800 hover:bg-gray-100 transition-colors duration-200" @click="window.__setTheme('dark'); themeOpenM = false; $dispatch('theme-updated', 'dark')"><span class="fa-solid fa-moon w-4 text-center"></span> Dark</button></li>
+                    <li><button type="button" class="w-full text-left px-4 py-2 flex items-center gap-3 dark:text-cyan-300 dark:hover:text-cyan-100 dark:hover:bg-gray-800 hover:bg-gray-100 transition-colors duration-200" @click="window.__setTheme('system'); themeOpenM = false; $dispatch('theme-updated', 'system')"><span class="fa-solid fa-circle-half-stroke w-4 text-center"></span> System</button></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>

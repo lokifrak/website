@@ -1,0 +1,30 @@
+<footer class="px-4 sm:px-0 py-4 mt-4 border-t dark:border-t-cyan-400/30 dark:border-t-2">
+    <div class="container mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4 sm:gap-0">
+        <div>
+            <p class="dark:text-cyan-50">&copy; {{ now.Year }} {{ .Site.Params.owner }}. All rights reserved.</p>
+            <p class="text-sm dark:text-cyan-300">Powered by <a href="http://gohugo.io" target="_blank" rel="noopener noreferrer" class="dark:text-cyan-400 dark:hover:text-cyan-200">Hugo</a> and <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="dark:text-cyan-400 dark:hover:text-cyan-200">Tailwind CSS</a>&mdash;No server-side code or database used</p>
+            <p class="text-sm dark:text-cyan-300">Unless otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" class="dark:text-cyan-400 dark:hover:text-cyan-200">Creative Commons Attribution-ShareAlike 4.0 International License</a></p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 items-center">
+            {{ with .Site.Params.social }}
+            <div class="flex gap-4">
+                {{ with .facebook }}
+                <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-gray-700 dark:text-cyan-400 dark:hover:text-cyan-200 hover:text-black transition-colors duration-200">
+                    <span class="fa-brands fa-facebook text-xl"></span>
+                </a>
+                {{ end }}
+                {{ with .instagram }}
+                <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-700 dark:text-cyan-400 dark:hover:text-cyan-200 hover:text-black transition-colors duration-200">
+                    <span class="fa-brands fa-instagram text-xl"></span>
+                </a>
+                {{ end }}
+                {{ with .x }}
+                <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="X" class="text-gray-700 dark:text-cyan-400 dark:hover:text-cyan-200 hover:text-black transition-colors duration-200">
+                    <span class="fa-brands fa-x-twitter text-xl"></span>
+                </a>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,130 @@
+backend:
+  name: gitlab
+  repo: lokifrak/website     # Your GitLab username or group and repo name
+  branch: main                # The branch you want to update
+  auth_type: pkce             # Enables secure, client-side OAuth
+  app_id: fe5b5b4d33b95b0b20aad1875a45f295e4f97bd005ca823d9d02417ea39c8da6 # Paste your GitLab Application ID here
+
+  # Optional: Add these only if you are using a Self-Hosted GitLab instance
+  api_root: https://forge.lokifrak.com/api/v4  # Replace with your GitLab instance API root
+  base_url: https://forge.lokifrak.com
+
+# Media configuration
+media_folder: "uploads"
+public_folder: "/uploads"
+
+# Locale configuration
+locale: en
+
+# Collections
+collections:
+  # Pages Collection
+  - name: pages
+    label: Pages
+    folder: content
+    format: frontmatter
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - {label: Title, name: title, widget: string, required: true}
+      - {label: Draft, name: draft, widget: boolean, default: false}
+      - {label: Date, name: date, widget: datetime, default: now, format: 'YYYY-MM-DDTHH:mm:ssZ'}
+      - {label: Body, name: body, widget: markdown}
+
+  # Blog Posts Collection
+  - name: posts
+    label: Blog Posts
+    folder: content/posts
+    format: frontmatter
+    create: true
+    slug: '{{year}}{{month}}{{day}}-{{slug}}'
+    fields:
+      - {label: Title, name: title, widget: string, required: true}
+      - {label: Date, name: date, widget: datetime, required: true, default: now, format: 'YYYY-MM-DDTHH:mm:ssZ'}
+      - {label: Draft, name: draft, widget: boolean, default: false}
+      - {label: Author, name: author, widget: string}
+      - {label: Tags, name: tags, widget: list, default: []}
+      - {label: Categories, name: categories, widget: list, default: ['Blog']}
+      - {label: Body, name: body, widget: markdown}
+
+  # Works Collection
+  - name: works
+    label: Works
+    folder: content/works
+    format: frontmatter
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        required: true
+      - label: Release Date
+        name: date
+        widget: datetime
+        required: true
+        default: now
+        format: 'DD MMMM YYYY'
+        time_format: false
+      - {label: Draft, name: draft, widget: boolean, default: false}
+      - label: Series
+        name: series
+        widget: list
+        required: false
+        default: []
+        summary: '{{fields.item}}'
+      - label: Author
+        name: authors
+        widget: list
+        required: false
+        default: []
+        summary: '{{fields.item}}'
+      - label: Illustrator
+        name: illustrators
+        widget: list
+        required: false
+        default: []
+        summary: '{{fields.item}}'
+      - label: Description
+        name: description
+        widget: text
+        required: false
+      - label: Image
+        name: image
+        widget: image
+        required: false
+      - label: Genres
+        name: genre
+        widget: list
+        default: ['Comedy']
+        summary: '{{fields.item}}'
+      - label: Links
+        name: links
+        widget: list
+        required: false
+        summary: '{{fields.ref}} → {{fields.link}}'
+        fields:
+          - {label: Label, name: ref, widget: string, required: true}
+          - {label: URL, name: link, widget: string, required: true}
+      - {label: Body, name: body, widget: markdown}
+
+  # Hero Data Collection (YAML)
+  - name: hero
+    label: Hero Section
+    files:
+      - name: hero
+        label: Hero Data
+        file: data/hero.yaml
+        format: yaml
+        fields:
+          - label: Hero Items
+            name: items
+            widget: list
+            fields:
+              - {label: Title, name: title, widget: string, required: true}
+              - {label: Subtitle, name: subtitle, widget: string}
+              - {label: Image, name: image, widget: image, required: false}
+              - {label: Link, name: link, widget: string}
+
+# Display options
+display_url: https://forge.lokifrak.com

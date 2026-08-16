@@ -1,0 +1,125 @@
+{{ define "main" }}
+<article class="container mx-auto px-4 py-10 max-w-6xl">
+    <div class="grid gap-10 lg:grid-cols-[2fr_1fr] lg:items-start">
+        <div class="space-y-6">
+            <header class="space-y-2">
+                {{ with .Date }}
+                <p class="text-sm font-semibold uppercase tracking-wide text-cyan-700 dark:text-cyan-200">Release date · {{ .Format "02 January 2006" }}</p>
+                {{ end }}
+                <h1 class="title text-4xl leading-tight">{{ .Title }}</h1>
+            </header>
+
+            <div class="prose dark:prose-invert prose-lg dark:prose-headings:text-cyan-300 dark:prose-headings:glow-cyan dark:prose-a:text-cyan-400 dark:prose-a:hover:text-cyan-300 dark:prose-code:text-purple-300 dark:prose-code:bg-purple-900/20 dark:prose-pre:bg-gray-900/50 dark:prose-pre:border dark:prose-pre:border-cyan-400/20 dark:prose-strong:text-cyan-200 dark:prose-em:text-blue-300 dark:prose-hr:border-cyan-400/30">
+                {{ .Content }}
+            </div>
+        </div>
+
+        <aside class="space-y-6 rounded-2xl border border-cyan-100/70 bg-white/70 p-6 shadow-sm backdrop-blur-sm dark:border-cyan-400/20 dark:bg-slate-900/60">
+            {{ with .Params.image }}
+            <figure class="overflow-hidden rounded-xl border border-cyan-100/60 shadow-sm dark:border-cyan-400/30">
+                <img class="h-48 w-full object-cover" src="{{ . }}" alt="Cover image for {{ $.Title }}" loading="lazy">
+            </figure>
+            {{ end }}
+
+            {{ $seriesTerms := .GetTerms "series" }}
+            {{ $seriesParams := .Params.series }}
+            {{ if or $seriesTerms $seriesParams }}
+            <section class="space-y-2">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Series</h2>
+                <div class="flex flex-wrap gap-2">
+                    {{ range $seriesTerms }}
+                    <a class="inline-flex items-center gap-2 rounded-full bg-cyan-100 px-3 py-1 text-sm font-semibold text-cyan-900 transition hover:bg-cyan-200 dark:bg-cyan-900/40 dark:text-cyan-100 dark:hover:bg-cyan-800/60" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                    {{ end }}
+                    {{ if not $seriesTerms }}
+                        {{ range $seriesParams }}
+                        <a class="inline-flex items-center gap-2 rounded-full bg-cyan-100 px-3 py-1 text-sm font-semibold text-cyan-900 transition hover:bg-cyan-200 dark:bg-cyan-900/40 dark:text-cyan-100 dark:hover:bg-cyan-800/60" href="{{ printf "/series/%s/" (urlize .) | relURL }}">{{ . }}</a>
+                        {{ end }}
+                    {{ end }}
+                </div>
+            </section>
+            {{ end }}
+
+            {{ $authorTerms := .GetTerms "author" }}
+            {{ $authorParams := .Params.authors }}
+            {{ if or $authorTerms $authorParams }}
+            <section class="space-y-2">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Author</h2>
+                <div class="flex flex-wrap gap-2">
+                    {{ range $authorTerms }}
+                    <a class="rounded-full border border-cyan-200 px-3 py-1 text-sm font-semibold text-cyan-800 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-700 dark:border-cyan-400/40 dark:text-cyan-100 dark:hover:border-cyan-300 dark:hover:text-cyan-50" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                    {{ end }}
+                    {{ if not $authorTerms }}
+                        {{ range $authorParams }}
+                        <a class="rounded-full border border-cyan-200 px-3 py-1 text-sm font-semibold text-cyan-800 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-700 dark:border-cyan-400/40 dark:text-cyan-100 dark:hover:border-cyan-300 dark:hover:text-cyan-50" href="{{ printf "/authors/%s/" (urlize .) | relURL }}">{{ . }}</a>
+                        {{ end }}
+                    {{ end }}
+                </div>
+            </section>
+            {{ end }}
+
+            {{ $illustratorTerms := .GetTerms "illustrator" }}
+            {{ $illustratorParams := .Params.illustrators }}
+            {{ if or $illustratorTerms $illustratorParams }}
+            <section class="space-y-2">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Illustrator</h2>
+                <div class="flex flex-wrap gap-2">
+                    {{ range $illustratorTerms }}
+                    <a class="rounded-full border border-purple-200 px-3 py-1 text-sm font-semibold text-purple-800 transition hover:-translate-y-0.5 hover:border-purple-300 hover:text-purple-700 dark:border-purple-300/40 dark:text-purple-100 dark:hover:border-purple-200 dark:hover:text-purple-50" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                    {{ end }}
+                    {{ if not $illustratorTerms }}
+                        {{ range $illustratorParams }}
+                        <a class="rounded-full border border-purple-200 px-3 py-1 text-sm font-semibold text-purple-800 transition hover:-translate-y-0.5 hover:border-purple-300 hover:text-purple-700 dark:border-purple-300/40 dark:text-purple-100 dark:hover:border-purple-200 dark:hover:text-purple-50" href="{{ printf "/illustrators/%s/" (urlize .) | relURL }}">{{ . }}</a>
+                        {{ end }}
+                    {{ end }}
+                </div>
+            </section>
+            {{ end }}
+
+            {{ with .Params.description }}
+            <section class="space-y-2">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Description</h2>
+                <p class="text-sm leading-relaxed text-slate-700 dark:text-slate-200">{{ . }}</p>
+            </section>
+            {{ end }}
+
+            {{ $genreTerms := .GetTerms "genres" }}
+            {{ $genreParams := .Params.genre }}
+            {{ $genreParamsPlural := .Params.genres }}
+            {{ if or $genreTerms $genreParams $genreParamsPlural }}
+            <section class="space-y-2">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Genres</h2>
+                <div class="flex flex-wrap gap-2">
+                    {{ range $genreTerms }}
+                    <a class="rounded-full border border-cyan-200 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-900 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-700 dark:border-cyan-400/30 dark:text-cyan-100 dark:hover:border-cyan-300 dark:hover:text-cyan-50" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                    {{ end }}
+                    {{ if not $genreTerms }}
+                        {{ if $genreParamsPlural }}
+                            {{ range $genreParamsPlural }}
+                            <a class="rounded-full border border-cyan-200 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-900 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-700 dark:border-cyan-400/30 dark:text-cyan-100 dark:hover:border-cyan-300 dark:hover:text-cyan-50" href="{{ printf "/genres/%s/" (urlize .) | relURL }}">{{ . }}</a>
+                            {{ end }}
+                        {{ else }}
+                            {{ range $genreParams }}
+                        <a class="rounded-full border border-cyan-200 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-900 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-700 dark:border-cyan-400/30 dark:text-cyan-100 dark:hover:border-cyan-300 dark:hover:text-cyan-50" href="{{ printf "/genres/%s/" (urlize .) | relURL }}">{{ . }}</a>
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                </div>
+            </section>
+            {{ end }}
+
+            {{ with .Params.links }}
+            <section class="space-y-3">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Links</h2>
+                <div class="grid gap-2">
+                    {{ range . }}
+                    {{ if and .ref .link }}
+                    <a class="inline-flex items-center justify-between rounded-lg bg-cyan-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500" href="{{ .link }}" target="_blank" rel="noopener">{{ .ref }}<span aria-hidden="true">↗</span></a>
+                    {{ end }}
+                    {{ end }}
+                </div>
+            </section>
+            {{ end }}
+        </aside>
+    </div>
+</article>
+{{ end }}

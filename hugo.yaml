@@ -1,0 +1,75 @@
+baseURL: https://comics.lokifrak.com/
+locale: en-us
+title: LokiFRAK
+theme: panelfrak
+
+params:
+  owner: PT Lokakarya Kreativitas Indonesia FRAK
+  themeDefault: system
+  social:
+    facebook: https://www.facebook.com/lokifrakpub
+    instagram: https://www.instagram.com/lokifrak
+    x: https://x.com/LokiFRAK
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    style: monokai
+
+permalinks:
+  posts: /posts/:year/:month/:title/
+
+taxonomies:
+  category: categories
+  tag: tags
+  genre: genres
+  author: authors
+  illustrator: illustrators
+  series: series
+
+build:
+  buildStats:
+    enable: true
+  cachebusters:
+    - source: assets/notwatching/hugo_stats\.json
+      target: css
+    - source: (postcss|tailwind)\.config\.js
+      target: css
+
+module:
+  mounts:
+    - source: assets
+      target: assets
+    - source: assets/notwatching
+      target: assets/notwatching
+      disableWatch: true
+    - source: hugo_stats.json
+      target: assets/notwatching/hugo_stats.json
+    - source: admin
+      target: static/admin
+    - source: uploads
+      target: static/uploads
+
+menus:
+  main:
+  - name: Home
+    pageRef: /
+    weight: 10
+  - name: Works
+    pageRef: /works
+    weight: 20
+  - name: Blog
+    pageRef: /posts
+    weight: 30
+  - name: About
+    pageRef: /about
+    weight: 40
+  - identifier: shop
+    name: Shop now
+    weight: 50
+  - name: LYNK.ID
+    url: https://lynk.id/lokifrak
+    weight: 10
+    parent: shop

@@ -1,0 +1,42 @@
+{{ define "main" }}
+<article class="container mx-auto px-4 py-8 prose dark:prose-invert dark:prose-headings:text-cyan-300 dark:prose-headings:glow-cyan dark:prose-a:text-cyan-400 dark:prose-a:hover:text-cyan-300 dark:prose-code:text-purple-300 dark:prose-code:bg-purple-900/20 dark:prose-pre:bg-gray-900/50 dark:prose-pre:border dark:prose-pre:border-cyan-400/20 dark:prose-strong:text-cyan-200 dark:prose-em:text-blue-300 dark:prose-hr:border-cyan-400/30 max-w-4xl">
+    <header class="mb-8 not-prose">
+        <h1 class="text-4xl font-bold mb-4 text-slate-900 dark:text-cyan-300 dark:glow-cyan">{{ .Title }}</h1>
+        <div class="flex flex-wrap items-center gap-4 text-sm text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-cyan-900/30 pb-4">
+            <div class="flex items-center">
+                <span>{{ .Date.Format "January 2, 2006" }}</span>
+            </div>
+            {{ with .Params.author }}
+            <div class="flex items-center">
+                <span>By {{ . }}</span>
+            </div>
+            {{ end }}
+            {{ with .Params.categories }}
+            <div class="flex gap-2">
+                {{ range . }}
+                <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}" class="px-2 py-0.5 rounded bg-slate-100 dark:bg-cyan-900/20 text-slate-700 dark:text-cyan-300 hover:bg-slate-200 dark:hover:bg-cyan-900/40 transition-colors">
+                    {{ . }}
+                </a>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+    </header>
+    
+    <div class="relative">
+        {{ .Content }}
+    </div>
+
+    <footer class="mt-12 pt-8 border-t border-slate-200 dark:border-cyan-900/30 not-prose">
+        {{ with .Params.tags }}
+        <div class="flex flex-wrap gap-2 mb-6">
+            {{ range . }}
+            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="text-sm px-3 py-1 rounded-full border border-slate-200 dark:border-cyan-900/50 text-slate-600 dark:text-slate-400 hover:border-cyan-500 dark:hover:border-cyan-500 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors">
+                #{{ . }}
+            </a>
+            {{ end }}
+        </div>
+        {{ end }}
+    </footer>
+</article>
+{{ end }}

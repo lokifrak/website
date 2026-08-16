@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <meta id="meta-color-scheme" name="color-scheme" content="light dark">
+        <script>
+            (function() {
+                var storageKey = 'theme';
+                var mql = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+                var defaultPref = {{ default "system" .Site.Params.themeDefault | jsonify }};
+                function normalize(v){ v = (v||'').toLowerCase(); return (v==='light'||v==='dark'||v==='system') ? v : 'system'; }
+                function setClass(mode){
+                    var isDark = mode === 'dark';
+                    document.documentElement.classList.toggle('dark', isDark);
+                    // Dark Reader & browser color-scheme detection
+                    document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+                    document.documentElement.setAttribute('data-darkreader-scheme', isDark ? 'dark' : 'light');
+                    var meta = document.getElementById('meta-color-scheme');
+                    if (meta) { meta.content = isDark ? 'dark' : 'light'; }
+                }
+                function updateLabel(mode){ var el = document.getElementById('theme-mode'); if (el) { el.textContent = mode.charAt(0).toUpperCase() + mode.slice(1); } }
+                var stored = null; try { stored = localStorage.getItem(storageKey); } catch (e) {}
+                var current = normalize(stored || defaultPref);
+                var mqlListener = null;
+                function applyFromSystem(){ setClass(mql && mql.matches ? 'dark' : 'light'); }
+                function setTheme(mode, persist){
+                    mode = normalize(mode);
+                    if (mql && mqlListener) { mql.removeEventListener('change', mqlListener); mqlListener = null; }
+                    if (mode === 'system') {
+                        applyFromSystem();
+                        if (mql && mql.addEventListener) {
+                            mqlListener = function(){ applyFromSystem(); updateLabel('system'); };
+                            mql.addEventListener('change', mqlListener);
+                        }
+                    } else {
+                        setClass(mode);
+                    }
+                    document.documentElement.dataset.theme = mode;
+                    if (persist !== false) { try { localStorage.setItem(storageKey, mode); } catch(e) {} }
+                    updateLabel(mode);
+                    // Dispatch event so Alpine dropdowns stay in sync
+                    window.dispatchEvent(new CustomEvent('theme-updated', { detail: mode }));
+                }
+                // Initialize
+                setTheme(current, false);
+                // Public API
+                window.__setTheme = function(mode){ setTheme(mode, true); };
+                window.__getTheme = function(){ return document.documentElement.dataset.theme || 'system'; };
+            })();
+        </script>
+    {{ with (templates.Defer (dict "key" "global")) }}
+      {{ partial "css.html" . }}
+    {{ end }}
+    {{ partial "js.html" . }}
+</head>
+<body class="bg-white text-gray-900 dark:bg-gray-950 dark:text-cyan-50">
+    {{ partial "header.html" . }}
+    
+    <main>
+        {{ block "main" . }}{{ end }}
+    </main>
+    
+    {{ partial "footer.html" . }}
+</body>
+</html>

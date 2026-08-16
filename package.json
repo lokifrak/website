@@ -1,0 +1,16 @@
+{
+  "name": "panelfrak",
+  "version": "1.0.0",
+  "description": "Official website for PanelFRAK",
+  "devDependencies": {
+    "@netlify/functions": "^2.8.2",
+    "@octokit/rest": "^20.1.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "node-fetch": "^2.7.0",
+    "tailwindcss": "^4.3.0"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "@types/node-fetch": "^2.6.13"
+  }
+}
