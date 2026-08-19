@@ -17,7 +17,7 @@ categories:
 
 <!--more-->
 
-The comic book itself is to be printed by [Ontakeriput Comics](https://www.ontakeriputcomics.com/), a top publisher of local indie comics, so you'll be delighted by its quality!
+Printing is to be handled by our print partner [Ontakeriput Comics](https://www.ontakeriputcomics.com/).
 
 # Synopsis
 
