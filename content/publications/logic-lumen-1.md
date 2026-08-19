@@ -1,6 +1,8 @@
 ---
 title: 'Logic & Lumen #1'
 date: 09 May 2026
+aliases:
+  - /works/logic-lumen-1/
 draft: false
 series:
   - Logic & Lumen

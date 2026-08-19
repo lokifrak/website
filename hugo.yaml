@@ -61,8 +61,8 @@ menus:
   - name: Home
     pageRef: /
     weight: 10
-  - name: Works
-    pageRef: /works
+  - name: Publications
+    pageRef: /publications
     weight: 20
   - name: Blog
     pageRef: /posts

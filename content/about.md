@@ -19,7 +19,7 @@ LokiFRAK is powered by professionals in the field:
 * **Gibran Alfaro** - Founder and Chief Executive Officer, and Producer. The brain behind it all.
 * **Farrel** - Business Development Officer, Chief Operating Officer. Operates day-to-day operations.
 
-We are also powered by a team of dedicated storytellers and artists under our **Seporsi Komik** division, which handles most of our works:
+We are also powered by a team of dedicated storytellers and artists under our **Seporsi Komik** division, which handles most of our publications:
 
 * **Gibran Alfaro** - also Worldbuilder and Writer alongside his job above
 * **Farrel** - also Writer alongside his job above

@@ -40,10 +40,10 @@ collections:
       - {label: Categories, name: categories, widget: list, default: ['Blog']}
       - {label: Body, name: body, widget: markdown}
 
-  # Works Collection
-  - name: works
-    label: Works
-    folder: content/works
+  # Publications Collection
+  - name: publications
+    label: Publications
+    folder: content/publications
     format: frontmatter
     create: true
     slug: '{{slug}}'
