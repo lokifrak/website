@@ -107,6 +107,26 @@
             </section>
             {{ end }}
 
+            {{ if or .Params.print_isbn .Params.ebook_isbn }}
+            <section class="space-y-2">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">ISBN</h2>
+                <dl class="space-y-1 text-sm text-slate-700 dark:text-slate-200">
+                    {{ with .Params.print_isbn }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">Print</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .Params.ebook_isbn }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">eBook</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                </dl>
+            </section>
+            {{ end }}
+
             {{ with .Params.links }}
             <section class="space-y-3">
                 <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Links</h2>
