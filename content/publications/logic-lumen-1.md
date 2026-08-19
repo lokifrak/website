@@ -13,7 +13,7 @@ illustrators:
 editors:
   - Gibran Alfaro
 description: Recruited into an elite military corps for his unorthodox empathy, rookie officer Ervan Xylos faces a fight for survival on a volatile alien world when his investigation awakens a colossal, biomechanical wyrm and plunges him into a mystery that defies his universe’s rigid order.
-image: '/uploads/Logic & Lumen #1 cover.png'
+image: ''
 genre:
   - Science Fiction
   - Action
