@@ -31,6 +31,7 @@ taxonomies:
   genre: genres
   author: authors
   illustrator: illustrators
+  editor: editors
   series: series
 
 build:
