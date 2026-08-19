@@ -101,9 +101,8 @@
             {{ end }}
 
             {{ $genreTerms := .GetTerms "genres" }}
-            {{ $genreParams := .Params.genre }}
             {{ $genreParamsPlural := .Params.genres }}
-            {{ if or $genreTerms $genreParams $genreParamsPlural }}
+            {{ if or $genreTerms $genreParamsPlural }}
             <section class="space-y-2">
                 <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Genres</h2>
                 <div class="flex flex-wrap gap-2">
@@ -111,14 +110,8 @@
                     <a class="rounded-full border border-cyan-200 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-900 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-700 dark:border-cyan-400/30 dark:text-cyan-100 dark:hover:border-cyan-300 dark:hover:text-cyan-50" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
                     {{ end }}
                     {{ if not $genreTerms }}
-                        {{ if $genreParamsPlural }}
-                            {{ range $genreParamsPlural }}
-                            <a class="rounded-full border border-cyan-200 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-900 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-700 dark:border-cyan-400/30 dark:text-cyan-100 dark:hover:border-cyan-300 dark:hover:text-cyan-50" href="{{ printf "/genres/%s/" (urlize .) | relURL }}">{{ . }}</a>
-                            {{ end }}
-                        {{ else }}
-                            {{ range $genreParams }}
+                        {{ range $genreParamsPlural }}
                         <a class="rounded-full border border-cyan-200 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-900 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-700 dark:border-cyan-400/30 dark:text-cyan-100 dark:hover:border-cyan-300 dark:hover:text-cyan-50" href="{{ printf "/genres/%s/" (urlize .) | relURL }}">{{ . }}</a>
-                            {{ end }}
                         {{ end }}
                     {{ end }}
                 </div>

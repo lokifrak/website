@@ -93,7 +93,7 @@ collections:
         widget: image
         required: false
       - label: Genres
-        name: genre
+        name: genres
         widget: list
         default: ['Comedy']
         summary: '{{fields.item}}'
