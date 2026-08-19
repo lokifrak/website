@@ -4,7 +4,7 @@ draft: false
 date: 2026-01-17T20:12:00+07:00
 ---
 
-Welcome to LokIFRAK, where we craft tales of the unknowable and astounding for readers across Indonesia and beyond. We are a collective of creators united by a single, driving force: a **#PassionBeyond**.
+Welcome to LokiFRAK, where we craft tales of the unknowable and astounding for readers across Indonesia and beyond. We are a collective of creators united by a single, driving force: a **#PassionBeyond**.
 
 More wonder. More imagination. More stories that challenge the mind and stir the soul.
 
@@ -14,10 +14,14 @@ In a world filled with the everyday, we journey into the extraordinary. Our focu
 
 ## The Architects of Worlds
 
-LokiFRAK is powered by a team of dedicated storytellers and artists:
+LokiFRAK is powered by professionals in the field:
 
-* **Gibran Alfaro** - Founder, Worldbuilder, Producer  
-* **Darth Qileansi** - Writer & Worldbuilder  
+* **Gibran Alfaro** - Founder and Chief Executive Officer, Worldbuilder, Producer. The brain behind it all.
+* **Farrel** - Business Development Officer, Chief Operating Officer. Operates day-to-day operations.
+
+We are also powered by a team of dedicated storytellers and artists:
+
+* **Qilean** - Writer & Worldbuilder  
 * **Farrel** - Writer  
 * **Hades** - Illustrator
 * **Nyankora** - Illustrator
@@ -27,13 +31,16 @@ LokiFRAK is powered by a team of dedicated storytellers and artists:
 
 ## Our Origin
 
-Founded in late 2024 by Gibran Alfaro, LokiFRAK was born from a vision to create a home for the kinds of epic, genre-bending stories we wanted to read but couldn't find. We are just beginning our journey, and we invite you to join us as we fracture the panels of reality and build something new.
+Founded in late 2024 by Gibran Alfaro and incorporated in 1 August 2026 as PT Lokakarya Kreativitas Indonesia FRAK, LokiFRAK was born from a vision to create a home for the kinds of epic, genre-bending stories we wanted to read but couldn't find. We are just beginning our journey, and we invite you to join us as we fracture the panels of reality and build something new.
 
 **#PassionBeyond**
 
 ## Contact us
 
 **PT Lokakarya Kreativitas Indonesia FRAK (LokiFRAK)**<br>
+Statutory domicile in Administrative City of East Jakarta<br>
+*(Berkedudukan statuter di Kota Administrasi Jakarta Timur)*
+
 Jalan Kayu Manis II No 27<br>
 RT 07 RW 02<br>
 Jakarta Timur 13130<br>
