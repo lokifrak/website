@@ -1,0 +1,51 @@
+{{- $siteDescription := printf "%s — %s" site.Title site.Params.owner -}}
+{{- $description := .Description -}}
+{{- if not $description }}{{ $description = .Summary }}{{ end -}}
+{{- if not $description }}{{ $description = $siteDescription }}{{ end -}}
+{{- $description = $description | plainify | htmlUnescape -}}
+{{- $description = replaceRE `\s+` " " $description -}}
+{{- $description = strings.TrimSpace $description | truncate 160 -}}
+
+{{- $author := site.Params.owner -}}
+{{- with .Params.author }}{{ $author = . }}{{ end -}}
+{{- with .Params.authors }}{{ $author = delimit . ", " }}{{ end -}}
+
+{{- $image := "" -}}
+{{- with .Params.image }}{{ $image = . | absURL }}{{ end -}}
+
+{{- $ogType := "website" -}}
+{{- if .IsPage }}{{ $ogType = "article" }}{{ end -}}
+
+{{- $localeParts := split site.Language.Locale "-" -}}
+{{- $locale := lower (index $localeParts 0) -}}
+{{- if gt (len $localeParts) 1 }}{{ $locale = printf "%s_%s" $locale (upper (index $localeParts 1)) }}{{ end -}}
+
+{{- $sameAs := slice -}}
+{{- with site.Params.social.facebook }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with site.Params.social.instagram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with site.Params.social.x }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+
+<meta name="description" content="{{ $description }}">
+<meta name="author" content="{{ $author }}">
+<link rel="canonical" href="{{ .Permalink }}">
+
+<meta property="og:title" content="{{ .Title }} | {{ site.Title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:type" content="{{ $ogType }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:locale" content="{{ $locale }}">
+{{- with $image }}
+<meta property="og:image" content="{{ . }}">
+{{- end }}
+
+<script type="application/ld+json">
+{{ (dict
+    "@context" "https://schema.org"
+    "@type" "Organization"
+    "name" site.Title
+    "legalName" site.Params.owner
+    "url" site.BaseURL
+    "sameAs" $sameAs
+) | jsonify (dict "indent" "  ") | safeJS }}
+</script>
