@@ -9,7 +9,7 @@ categories:
   - Blog
 ---
 
-**Welcome to PanelFRAK.**
+**Welcome to LokiFRAK.**
 
 Feel free to browse this website. We're planning some comic books and novels for you to read!
 
@@ -17,6 +17,6 @@ Feel free to browse this website. We're planning some comic books and novels for
 
 ***
 
-**Selamat datang di PanelFRAK.**
+**Selamat datang di LokiFRAK.**
 
 Silakan meramban situs ini. Kami sedang merencanakan beberapa komik dan novel untuk kalian baca!
