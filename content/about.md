@@ -22,7 +22,7 @@ LokiFRAK is powered by professionals in the field:
 We are also powered by a team of dedicated storytellers and artists:
 
 * **Qilean** - Writer & Worldbuilder  
-* **Farrel** - Writer  
+* **Farrel** - also Writer  
 * **Hades** - Illustrator
 * **Nyankora** - Illustrator
 * **Lexi** - Illustrator
