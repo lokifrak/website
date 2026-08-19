@@ -50,7 +50,7 @@ The CMS is configured with 4 collections based on your archetypes:
 
 1. **Pages** - Main site pages (About, Home, etc.)
 2. **Blog Posts** - Posts collection with tags, categories, author, description
-3. **Works** - Works/portfolio collection with genres and series support
+3. **Publications** - Publications/portfolio collection with genres and series support
 4. **Hero Section** - Editable hero data from `data/hero.yaml`
 
 ## Deployment Requirements
