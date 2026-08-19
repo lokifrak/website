@@ -14,4 +14,6 @@ links:
   link: 'https://www.globalcomix.com/'
 genres:
 - Comedy
+print_isbn: 'N/A'
+ebook_isbn: 'N/A'
 ---
