@@ -38,8 +38,8 @@ Founded in late 2024 by Gibran Alfaro and incorporated in 1 August 2026 as PT Lo
 ## Contact us
 
 **PT Lokakarya Kreativitas Indonesia FRAK (LokiFRAK)**<br>
-Statutory domicile in Administrative City of East Jakarta<br>
-*(Berkedudukan statuter di Kota Administrasi Jakarta Timur)*
+a sole-shareholder private limited company under Indonesian law, with statutory domicile in Administrative City of East Jakarta<br>
+*(sebuah perseroan perorangan dibawah hukum Indonesia, berkedudukan statuter di Kota Administrasi Jakarta Timur)*
 
 Jalan Kayu Manis II No 27<br>
 RT 07 RW 02<br>
