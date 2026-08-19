@@ -4,7 +4,7 @@ draft: false
 date: 2026-01-17T20:12:00+07:00
 ---
 
-Welcome to LokiFRAK, where we craft tales of the unknowable and astounding for readers across Indonesia and beyond. We are a collective of creators united by a single, driving force: a **#PassionBeyond**.
+Welcome to LokiFRAK, where we craft tales of the unknowable and astounding for readers across Indonesia and beyond. We are a publisher of books and comics with a single, driving force: a **#PassionBeyond**.
 
 More wonder. More imagination. More stories that challenge the mind and stir the soul.
 
@@ -16,13 +16,14 @@ In a world filled with the everyday, we journey into the extraordinary. Our focu
 
 LokiFRAK is powered by professionals in the field:
 
-* **Gibran Alfaro** - Founder and Chief Executive Officer, Worldbuilder, Producer. The brain behind it all.
+* **Gibran Alfaro** - Founder and Chief Executive Officer, and Producer. The brain behind it all.
 * **Farrel** - Business Development Officer, Chief Operating Officer. Operates day-to-day operations.
 
-We are also powered by a team of dedicated storytellers and artists:
+We are also powered by a team of dedicated storytellers and artists under our **Seporsi Komik** division, which handles most of our works:
 
-* **Qilean** - Writer & Worldbuilder  
+* **Gibran Alfaro** - also Worldbuilder and Writer alongside his job above
 * **Farrel** - also Writer alongside his job above
+* **Qilean** - Writer & Worldbuilder
 * **Hades** - Illustrator
 * **Nyankora** - Illustrator
 * **Lexi** - Illustrator
