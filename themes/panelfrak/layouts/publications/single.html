@@ -75,6 +75,24 @@
             </section>
             {{ end }}
 
+            {{ $editorTerms := .GetTerms "editor" }}
+            {{ $editorParams := .Params.editors }}
+            {{ if or $editorTerms $editorParams }}
+            <section class="space-y-2">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Editor</h2>
+                <div class="flex flex-wrap gap-2">
+                    {{ range $editorTerms }}
+                    <a class="rounded-full border border-cyan-200 px-3 py-1 text-sm font-semibold text-cyan-800 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-700 dark:border-cyan-400/40 dark:text-cyan-100 dark:hover:border-cyan-300 dark:hover:text-cyan-50" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                    {{ end }}
+                    {{ if not $editorTerms }}
+                        {{ range $editorParams }}
+                        <a class="rounded-full border border-cyan-200 px-3 py-1 text-sm font-semibold text-cyan-800 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-700 dark:border-cyan-400/40 dark:text-cyan-100 dark:hover:border-cyan-300 dark:hover:text-cyan-50" href="{{ printf "/editors/%s/" (urlize .) | relURL }}">{{ . }}</a>
+                        {{ end }}
+                    {{ end }}
+                </div>
+            </section>
+            {{ end }}
+
             {{ with .Params.description }}
             <section class="space-y-2">
                 <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Description</h2>
@@ -118,6 +136,96 @@
                     </div>
                     {{ end }}
                     {{ with .Params.ebook_isbn }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">eBook</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                </dl>
+            </section>
+            {{ end }}
+
+            {{ if or .Params.publisher .Params.pub_city .Params.pub_year .Params.pages .Params.language .Params.formats }}
+            <section class="space-y-2">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Publication Details</h2>
+                <dl class="space-y-1 text-sm text-slate-700 dark:text-slate-200">
+                    {{ with .Params.publisher }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">Publisher</dt>
+                        <dd class="text-right">{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .Params.pub_city }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">City</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .Params.pub_year }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">First published</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .Params.pages }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">Pages</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .Params.language }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">Language</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .Params.formats }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">Format</dt>
+                        <dd class="text-right">{{ delimit . ", " }}</dd>
+                    </div>
+                    {{ end }}
+                </dl>
+            </section>
+            {{ end }}
+
+            {{ with .Params.physical }}
+            <section class="space-y-2">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Physical Description</h2>
+                <dl class="space-y-1 text-sm text-slate-700 dark:text-slate-200">
+                    {{ with .bind }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">Bind</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .paper }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">Paper</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .print }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">Print</dt>
+                        <dd>{{ if eq . "bw" }}Black &amp; white{{ else }}{{ . | title }}{{ end }}</dd>
+                    </div>
+                    {{ end }}
+                </dl>
+            </section>
+            {{ end }}
+
+            {{ if or .Params.print_mrp_java .Params.ebook_mrp }}
+            <section class="space-y-2">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">MRP (HET)</h2>
+                <dl class="space-y-1 text-sm text-slate-700 dark:text-slate-200">
+                    {{ with .Params.print_mrp_java }}
+                    <div class="flex items-baseline justify-between gap-2">
+                        <dt class="font-semibold">Print (Java Island)</dt>
+                        <dd>{{ . }}</dd>
+                    </div>
+                    {{ end }}
+                    {{ with .Params.ebook_mrp }}
                     <div class="flex items-baseline justify-between gap-2">
                         <dt class="font-semibold">eBook</dt>
                         <dd>{{ . }}</dd>

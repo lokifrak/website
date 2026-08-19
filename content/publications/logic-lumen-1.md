@@ -12,6 +12,8 @@ authors:
   - Edgy Fleur
 illustrators:
   - Nyankora
+editors:
+  - Gibran Alfaro
 description: Recruited into an elite military corps for his unorthodox empathy, rookie officer Ervan Xylos faces a fight for survival on a volatile alien world when his investigation awakens a colossal, biomechanical wyrm and plunges him into a mystery that defies his universe’s rigid order.
 image: /uploads/Logic & Lumen 1 banner.jpg
 genre:
@@ -23,6 +25,20 @@ genres:
   - Science Fiction
 print_isbn: N/A
 ebook_isbn: N/A
+publisher: PT Lokakarya Kreativitas Indonesia FRAK
+pub_city: Jakarta
+pub_year: '2026'
+pages: 20
+language: English
+formats:
+  - Print
+  - PDF eBook
+print_mrp_java: Rp100,000
+ebook_mrp: Rp55,000
+physical:
+  bind: perfect bound
+  paper: B5 100gsm paper
+  print: color
 ---
 
 Eldorath Prime is a world of flawless order, but its rigid statutes are powerless against the chaos of genuine emotion. When junior officer Ervan Xylos disregards protocol to defuse a hostage crisis through sheer intuition and empathy, his unorthodox methods catch the eye of the elite Enforcer Corps. Fast-tracked into their ranks, Ervan is deployed alone to the ash-choked, volcanic world of XylosPrime to investigate a mysteriously collapsed atmospheric tower. What begins as a routine survey quickly spirals into a nightmare when Ervan discovers bizarre, organic anomalies fused into the molten landscape. Upon touching a massive, energy-charged obsidian scale, he triggers a fragmented vision of ancient fire and shattered skies—and awakens a sleeping leviathan. Now hunted by a colossal biomechanical Wyrm breathing raw plasma, Ervan’s cutting-edge transformation suit is failing to deploy, and his only hope lies in the very instincts his superiors warned him against. In a universe that demands perfect logic, can a rookie who feels too much survive a threat that defies all reason?

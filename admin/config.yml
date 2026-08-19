@@ -78,6 +78,12 @@ collections:
         required: false
         default: []
         summary: '{{fields.item}}'
+      - label: Editor
+        name: editors
+        widget: list
+        required: true
+        default: ['Gibran Alfaro']
+        summary: '{{fields.item}}'
       - label: Description
         name: description
         widget: text
@@ -93,6 +99,74 @@ collections:
         summary: '{{fields.item}}'
       - {label: Print ISBN, name: print_isbn, widget: string, required: false, default: 'N/A'}
       - {label: eBook ISBN, name: ebook_isbn, widget: string, required: false, default: 'N/A'}
+      - label: Publisher
+        name: publisher
+        widget: string
+        required: true
+        default: 'PT Lokakarya Kreativitas Indonesia FRAK'
+      - label: City of Publication
+        name: pub_city
+        widget: string
+        required: true
+        default: 'Jakarta'
+      - label: Year of First Publication
+        name: pub_year
+        widget: datetime
+        required: true
+        default: now
+        format: 'YYYY'
+        time_format: false
+      - label: No. of Pages
+        name: pages
+        widget: number
+        required: true
+        value_type: int
+        default: 20
+      - label: Language
+        name: language
+        widget: select
+        required: true
+        options: ['English', 'Indonesian']
+        default: 'English'
+      - label: Format
+        name: formats
+        widget: select
+        required: true
+        multiple: true
+        options: ['Print', 'PDF eBook', 'EPUB eBook']
+        default: ['Print', 'PDF eBook', 'EPUB eBook']
+      - label: Java Island Print MRP (HET)
+        name: print_mrp_java
+        widget: string
+        required: true
+        default: 'Rp100,000'
+      - label: eBook MRP
+        name: ebook_mrp
+        widget: string
+        required: true
+        default: 'Rp55,000'
+      - label: Physical Description
+        name: physical
+        widget: object
+        required: true
+        fields:
+          - label: Bind
+            name: bind
+            widget: select
+            required: true
+            options: ['perfect bound', 'stapled']
+            default: 'perfect bound'
+          - label: Paper Type
+            name: paper
+            widget: string
+            required: true
+            default: 'B5 100gsm paper'
+          - label: Print
+            name: print
+            widget: select
+            required: true
+            options: ['color', 'bw']
+            default: 'color'
       - label: Links
         name: links
         widget: list
