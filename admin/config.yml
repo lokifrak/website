@@ -91,6 +91,8 @@ collections:
         widget: list
         default: ['Comedy']
         summary: '{{fields.item}}'
+      - {label: Print ISBN, name: print_isbn, widget: string, required: false, default: 'N/A'}
+      - {label: eBook ISBN, name: ebook_isbn, widget: string, required: false, default: 'N/A'}
       - label: Links
         name: links
         widget: list
