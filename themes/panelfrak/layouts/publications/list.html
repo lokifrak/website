@@ -2,7 +2,7 @@
 <div class="container mx-auto px-4 py-12 max-w-5xl">
     <section class="space-y-10">
         <header class="mb-12 text-center">
-            <h1 class="text-4xl font-bold mb-4 text-slate-900 dark:text-cyan-300 dark:glow-cyan">{{ .Title }}</h1>
+            <h1 class="text-4xl font-bold mb-4 text-loki-ink-900 dark:text-loki-teal-100 dark:glow-teal">{{ .Title }}</h1>
             {{ with .Content }}
                 <div class="prose dark:prose-invert mx-auto">
                     {{ . }}
@@ -12,7 +12,7 @@
 
         <div class="grid gap-8 lg:gap-10">
             {{ range .Pages }}
-            <article class="group flex flex-col overflow-hidden rounded-2xl border border-cyan-100/60 bg-white/60 shadow-sm backdrop-blur-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-cyan-400/20 dark:bg-slate-900/50">
+            <article class="group flex flex-col overflow-hidden rounded-2xl border border-loki-teal-200/60 bg-white/60 shadow-sm backdrop-blur-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-loki-teal-400/20 dark:bg-loki-ink-900/50">
                 {{ if .Params.image }}
                 <a class="relative block" href="{{ .RelPermalink }}">
                     <img class="h-64 w-full object-cover transition duration-300 group-hover:brightness-105" src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
@@ -20,17 +20,17 @@
                 {{ end }}
 
                 <div class="flex flex-1 flex-col gap-4 p-6">
-                    <div class="flex flex-wrap items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
+                    <div class="flex flex-wrap items-center gap-2 text-sm text-loki-ink-700 dark:text-loki-ink-200">
                         {{ $seriesTerms := .GetTerms "series" }}
                         {{ $seriesParams := .Params.series }}
                         {{ if or $seriesTerms $seriesParams }}
                         <span class="flex flex-wrap gap-2">
                             {{ range $seriesTerms }}
-                            <a class="rounded-full bg-cyan-100 px-3 py-1 font-medium text-cyan-900 transition hover:bg-cyan-200 dark:bg-cyan-900/40 dark:text-cyan-100 dark:hover:bg-cyan-800/60" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                            <a class="rounded-full bg-loki-teal-100 px-3 py-1 font-medium text-loki-teal-900 transition hover:bg-loki-teal-200 dark:bg-loki-teal-900/40 dark:text-loki-teal-100 dark:hover:bg-loki-teal-800/60" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
                             {{ end }}
                             {{ if not $seriesTerms }}
                                 {{ range $seriesParams }}
-                                <a class="rounded-full bg-cyan-100 px-3 py-1 font-medium text-cyan-900 transition hover:bg-cyan-200 dark:bg-cyan-900/40 dark:text-cyan-100 dark:hover:bg-cyan-800/60" href="{{ printf "/series/%s/" (urlize .) | relURL }}">{{ . }}</a>
+                                <a class="rounded-full bg-loki-teal-100 px-3 py-1 font-medium text-loki-teal-900 transition hover:bg-loki-teal-200 dark:bg-loki-teal-900/40 dark:text-loki-teal-100 dark:hover:bg-loki-teal-800/60" href="{{ printf "/series/%s/" (urlize .) | relURL }}">{{ . }}</a>
                                 {{ end }}
                             {{ end }}
                         </span>
@@ -38,27 +38,27 @@
                         {{ with .Params.genres }}
                         <span class="flex flex-wrap gap-2">
                             {{ range . }}
-                            <span class="rounded-full border border-cyan-200 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-900 dark:border-cyan-400/30 dark:text-cyan-100">{{ . }}</span>
+                            <a class="rounded-full border border-loki-pink-300 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-loki-pink-800 transition hover:border-loki-pink-500 dark:border-loki-pink-400/40 dark:text-loki-pink-200 dark:hover:border-loki-pink-300" href="{{ printf "/genres/%s/" (urlize .) | relURL }}">{{ . }}</a>
                             {{ end }}
                         </span>
                         {{ end }}
                     </div>
 
                     <div class="space-y-2">
-                        <h2 class="text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white">
-                            <a class="transition hover:text-cyan-600 dark:hover:text-cyan-300" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                        <h2 class="text-2xl font-semibold leading-tight tracking-tight text-loki-ink-900 dark:text-white">
+                            <a class="transition hover:text-loki-teal-700 dark:hover:text-loki-teal-200" href="{{ .RelPermalink }}">{{ .Title }}</a>
                         </h2>
                         {{ with .Params.description }}
-                        <p class="text-base text-slate-700 dark:text-slate-300">{{ . }}</p>
+                        <p class="text-base text-loki-ink-700 dark:text-loki-ink-200">{{ . }}</p>
                         {{ else }}
                             {{ with .Summary }}
-                            <p class="text-base text-slate-700 dark:text-slate-300">{{ . }}</p>
+                            <p class="text-base text-loki-ink-700 dark:text-loki-ink-200">{{ . }}</p>
                             {{ end }}
                         {{ end }}
                     </div>
 
                     <div class="mt-auto">
-                        <a class="inline-flex items-center gap-2 font-semibold text-cyan-700 transition hover:gap-3 hover:text-cyan-500 dark:text-cyan-200 dark:hover:text-cyan-100" href="{{ .RelPermalink }}">
+                        <a class="inline-flex items-center gap-2 font-semibold text-loki-pink-700 transition hover:gap-3 hover:text-loki-pink-900 dark:text-loki-pink-300 dark:hover:text-loki-pink-100" href="{{ .RelPermalink }}">
                             See details
                             <span aria-hidden="true">→</span>
                         </a>

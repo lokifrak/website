@@ -6,14 +6,14 @@
 <section class="container mx-auto px-4 py-12 md:py-16">
     <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
         <div class="flex items-center gap-3 flex-wrap">
-            <button type="button" class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-100 dark:border-cyan-400/30 dark:text-cyan-100 dark:hover:bg-gray-800 transition" data-hero-toggle>
+            <button type="button" class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-loki-ink-200 text-loki-ink-700 hover:bg-loki-ink-100 dark:border-loki-teal-400/30 dark:text-loki-teal-100 dark:hover:bg-loki-ink-800 transition" data-hero-toggle>
                 <span aria-live="polite" data-hero-toggle-label>Pause autoplay</span>
             </button>
-            <div class="inline-flex shadow-sm rounded-md overflow-hidden border border-gray-200 dark:border-cyan-400/30">
-                <button type="button" class="px-3 py-2 bg-white hover:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 text-gray-700 dark:text-cyan-100" aria-label="Previous hero" data-hero-prev>
+            <div class="inline-flex shadow-sm rounded-md overflow-hidden border border-loki-ink-200 dark:border-loki-teal-400/30">
+                <button type="button" class="px-3 py-2 bg-white hover:bg-loki-ink-100 dark:bg-loki-ink-900 dark:hover:bg-loki-ink-800 text-loki-ink-700 dark:text-loki-teal-100" aria-label="Previous hero" data-hero-prev>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
                 </button>
-                <button type="button" class="px-3 py-2 bg-white hover:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 text-gray-700 dark:text-cyan-100 border-l border-gray-200 dark:border-cyan-400/30" aria-label="Next hero" data-hero-next>
+                <button type="button" class="px-3 py-2 bg-white hover:bg-loki-ink-100 dark:bg-loki-ink-900 dark:hover:bg-loki-ink-800 text-loki-ink-700 dark:text-loki-teal-100 border-l border-loki-ink-200 dark:border-loki-teal-400/30" aria-label="Next hero" data-hero-next>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>
                 </button>
             </div>
@@ -21,23 +21,23 @@
     </div>
 
     {{ with $heroes }}
-    <div id="hero-carousel" class="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-cyan-400/30 shadow-lg h-[400px] md:h-[560px] bg-gray-50 dark:bg-gray-900" role="region" aria-roledescription="carousel" aria-label="Featured content carousel">
+    <div id="hero-carousel" class="relative overflow-hidden rounded-2xl border border-loki-ink-200 dark:border-loki-teal-400/30 shadow-lg h-[400px] md:h-[560px] bg-loki-ink-50 dark:bg-loki-ink-900" role="region" aria-roledescription="carousel" aria-label="Featured content carousel">
         <div class="carousel-track flex h-full transition-transform duration-700 ease-in-out" style="transform: translateX(0%);">
             {{ range $index, $hero := .items }}
             {{- $heroLink := $hero.link | default "#" -}}
             {{- $heroHref := cond (or (eq $heroLink "#") (strings.HasPrefix $heroLink "#")) $heroLink ($heroLink | relURL) -}}
-            <div class="carousel-slide flex-shrink-0 w-full h-full relative" 
+            <div class="carousel-slide shrink-0 w-full h-full relative" 
                  data-slide-index="{{ $index }}"
                  role="group"
                  aria-roledescription="slide"
                  aria-label="Slide {{ add $index 1 }} of {{ len $heroes.items }}">
                 {{ if ne $heroHref "#" }}
-                <a href="{{ $heroHref }}" class="block h-full w-full focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 rounded-xl" tabindex="{{ if eq $index 0 }}0{{ else }}-1{{ end }}">
+                <a href="{{ $heroHref }}" class="block h-full w-full focus:outline-none focus:ring-2 focus:ring-loki-teal-500 focus:ring-offset-2 dark:focus:ring-offset-loki-ink-900 rounded-xl" tabindex="{{ if eq $index 0 }}0{{ else }}-1{{ end }}">
                 {{ end }}
                     <div class="relative h-full w-full">
                         {{- $imgSrc := $hero.image -}}
                         <img src="{{ $imgSrc }}" alt="{{ $hero.title }}" class="w-full h-full object-cover" loading="{{ if eq $index 0 }}eager{{ else }}lazy{{ end }}">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                        <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 flex flex-col gap-3 text-white">
                             <h2 class="text-3xl md:text-4xl font-bold drop-shadow-lg">{{ $hero.title }}</h2>
                             {{ with $hero.subtitle }}<span class="text-sm md:text-base px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 w-fit">{{ . }}</span>{{ end }}
@@ -70,25 +70,25 @@
 <section class="container mx-auto px-4 py-12 md:py-16">
     <div class="flex items-center justify-between gap-4 mb-6">
         <div>
-            <p class="text-sm uppercase tracking-wide text-cyan-500 dark:text-cyan-300">Latest publications</p>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-cyan-200">Fresh off the drawing board</h2>
+            <p class="text-sm uppercase tracking-wide text-loki-teal-600 dark:text-loki-teal-300">Latest publications</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-loki-ink-900 dark:text-loki-teal-100">Fresh off the drawing board</h2>
         </div>
     </div>
     {{ if $publications }}
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {{ range $publications }}
             {{ $desc := (default "" .Params.description | plainify | truncate 150) }}
-            <article class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-cyan-400/30 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+            <article class="group bg-white dark:bg-loki-ink-900 border border-loki-ink-200 dark:border-loki-teal-400/30 rounded-2xl shadow-sm overflow-hidden flex flex-col">
                 <div class="relative aspect-[4/3] overflow-hidden">
                     {{ with .Params.image }}
                         {{- $imgSrc := . -}}
                         <img src="{{ $imgSrc }}" alt="{{ $.Title }} cover" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" loading="lazy">
                     {{ else }}
-                        <div class="w-full h-full bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900/40 dark:to-blue-900/30"></div>
+                        <div class="w-full h-full bg-linear-to-br from-loki-teal-100 via-loki-sky-100 to-loki-pink-100 dark:from-loki-teal-900/40 dark:via-loki-sky-900/30 dark:to-loki-pink-900/30"></div>
                     {{ end }}
                 </div>
                 <div class="p-5 flex flex-col gap-3 flex-1">
-                    <div class="flex items-center gap-2 text-xs uppercase tracking-wide text-cyan-600 dark:text-cyan-300">
+                    <div class="flex items-center gap-2 text-xs uppercase tracking-wide text-loki-teal-700 dark:text-loki-teal-300">
                         {{ $seriesTerms := .GetTerms "series" }}
                         {{ if $seriesTerms }}
                             {{ range $seriesTerms }}
@@ -101,15 +101,15 @@
                                 {{ end }}
                             {{ end }}
                         {{ end }}
-                        {{ with .Params.genres }}{{ range . }}<a href="{{ printf "/genres/%s/" (urlize .) | relURL }}" class="px-2 py-1 rounded-full bg-cyan-100 text-cyan-800 dark:bg-cyan-900/50 dark:text-cyan-100 hover:bg-cyan-200 dark:hover:bg-cyan-800 transition">{{ . }}</a>{{ end }}{{ end }}
+                        {{ with .Params.genres }}{{ range . }}<a href="{{ printf "/genres/%s/" (urlize .) | relURL }}" class="px-2 py-1 rounded-full bg-loki-pink-100 text-loki-pink-800 dark:bg-loki-pink-900/50 dark:text-loki-pink-100 hover:bg-loki-pink-200 dark:hover:bg-loki-pink-800 transition">{{ . }}</a>{{ end }}{{ end }}
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-cyan-100">
-                        <a href="{{ .RelPermalink }}" class="hover:text-cyan-600 dark:hover:text-cyan-200 transition">{{ .Title }}</a>
+                    <h3 class="text-xl font-semibold text-loki-ink-900 dark:text-loki-teal-50">
+                        <a href="{{ .RelPermalink }}" class="hover:text-loki-teal-700 dark:hover:text-loki-teal-200 transition">{{ .Title }}</a>
                     </h3>
-                    <p class="text-sm text-gray-700 dark:text-gray-200/90 leading-relaxed">{{ $desc }}</p>
-                    <div class="mt-auto flex items-center justify-between text-sm text-gray-500 dark:text-gray-300">
+                    <p class="text-sm text-loki-ink-700 dark:text-loki-ink-200/90 leading-relaxed">{{ $desc }}</p>
+                    <div class="mt-auto flex items-center justify-between text-sm text-loki-ink-500 dark:text-loki-ink-300">
                         <span>{{ .Date.Format "Jan 2, 2006" }}</span>
-                        <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-1 text-cyan-700 dark:text-cyan-200 hover:underline">Read publication
+                        <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-1 text-loki-pink-700 dark:text-loki-pink-300 hover:underline">Read publication
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="m9 5 7 7-7 7"/></svg>
                         </a>
                     </div>
@@ -118,40 +118,40 @@
             {{ end }}
         </div>
     {{ else }}
-        <p class="text-gray-600 dark:text-gray-200">No publications yet. Add entries under <code>content/publications</code> to see them here.</p>
+        <p class="text-loki-ink-600 dark:text-loki-ink-200">No publications yet. Add entries under <code>content/publications</code> to see them here.</p>
     {{ end }}
 </section>
 
 <section class="container mx-auto px-4 py-12 md:py-16">
     <div class="flex items-center justify-between gap-4 mb-6">
         <div>
-            <p class="text-sm uppercase tracking-wide text-cyan-500 dark:text-cyan-300">Latest articles</p>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-cyan-200">From the blog</h2>
+            <p class="text-sm uppercase tracking-wide text-loki-pink-600 dark:text-loki-pink-300">Latest articles</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-loki-ink-900 dark:text-loki-pink-100">From the blog</h2>
         </div>
-        <a href="{{ relURL "/posts" }}" class="inline-flex items-center gap-2 text-cyan-700 dark:text-cyan-100 hover:underline">View archive
+        <a href="{{ relURL "/posts" }}" class="inline-flex items-center gap-2 text-loki-teal-700 dark:text-loki-teal-100 hover:underline">View archive
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="m9 5 7 7-7 7"/></svg>
         </a>
     </div>
     {{ if $posts }}
         <div class="grid gap-6 md:grid-cols-3">
             {{ range $posts }}
-            <article class="h-full flex flex-col gap-3 p-5 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-cyan-400/30 shadow-sm">
-                <div class="text-sm text-gray-500 dark:text-gray-300 flex items-center justify-between">
+            <article class="h-full flex flex-col gap-3 p-5 rounded-2xl bg-white dark:bg-loki-ink-900 border border-loki-ink-200 dark:border-loki-teal-400/30 shadow-sm">
+                <div class="text-sm text-loki-ink-500 dark:text-loki-ink-300 flex items-center justify-between">
                     <span>{{ .Date.Format "Jan 2, 2006" }}</span>
-                    {{ with .Params.categories }}<span class="px-2 py-1 rounded-full bg-cyan-100 text-cyan-800 dark:bg-cyan-900/50 dark:text-cyan-100 text-xs">{{ delimit . ", " }}</span>{{ end }}
+                    {{ with .Params.categories }}<span class="px-2 py-1 rounded-full bg-loki-sky-100 text-loki-sky-900 dark:bg-loki-sky-900/50 dark:text-loki-sky-100 text-xs">{{ delimit . ", " }}</span>{{ end }}
                 </div>
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-cyan-100">
-                    <a href="{{ .RelPermalink }}" class="hover:text-cyan-600 dark:hover:text-cyan-200 transition">{{ .Title }}</a>
+                <h3 class="text-xl font-semibold text-loki-ink-900 dark:text-loki-teal-50">
+                    <a href="{{ .RelPermalink }}" class="hover:text-loki-pink-700 dark:hover:text-loki-pink-200 transition">{{ .Title }}</a>
                 </h3>
-                <p class="text-sm text-gray-700 dark:text-gray-200/90 leading-relaxed">{{ .Summary | plainify | truncate 140 }}</p>
-                <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-2 text-cyan-700 dark:text-cyan-100 hover:underline">Read article
+                <p class="text-sm text-loki-ink-700 dark:text-loki-ink-200/90 leading-relaxed">{{ .Summary | plainify | truncate 140 }}</p>
+                <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-2 text-loki-pink-700 dark:text-loki-pink-300 hover:underline">Read article
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="m9 5 7 7-7 7"/></svg>
                 </a>
             </article>
             {{ end }}
         </div>
     {{ else }}
-        <p class="text-gray-600 dark:text-gray-200">No blog posts yet. Add entries under <code>content/posts</code> to see them here.</p>
+        <p class="text-loki-ink-600 dark:text-loki-ink-200">No blog posts yet. Add entries under <code>content/posts</code> to see them here.</p>
     {{ end }}
 </section>
 

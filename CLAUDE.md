@@ -33,7 +33,11 @@ The theme is `panelfrak`, developed inside this repo at `themes/panelfrak/` (not
 
 Tailwind CSS v4 is compiled by Hugo itself via the `css.TailwindCSS` pipe in `layouts/_partials/css.html` — there is no separate Tailwind watch process and no `tailwind.config.js`. Configuration is CSS-first in `themes/panelfrak/assets/css/input.css` (`@theme`, `@custom-variant`, `@plugin`). Class detection works through Hugo build stats: `hugo.yaml` enables `buildStats`, mounts `hugo_stats.json` into `assets/notwatching/` (watch-disabled to avoid rebuild loops), and `input.css` declares `@source "hugo_stats.json"`. Consequence: **Tailwind only sees class names that appear in templates/content** — dynamically composed class strings won't be emitted.
 
-Dark mode is class-based (`@custom-variant dark (.dark &)`). An inline script in `layouts/baseof.html` manages the light/dark/system preference (persisted in `localStorage` under `theme`, exposed as `window.__setTheme`/`window.__getTheme`, syncs with UI via a `theme-updated` event). Alpine.js (loaded from CDN in `_partials/js.html`) handles interactive components like the theme dropdown. Fonts are Inter (body, `--font-sans`) and Plus Jakarta Sans (headings, `--font-heading`); the dark theme uses cyan/blue/purple "sci-fi glow" utilities defined in `input.css`.
+Dark mode is class-based (`@custom-variant dark (.dark &)`). An inline script in `layouts/baseof.html` manages the light/dark/system preference (persisted in `localStorage` under `theme`, exposed as `window.__setTheme`/`window.__getTheme`, syncs with UI via a `theme-updated` event). Alpine.js (loaded from CDN in `_partials/js.html`) handles interactive components like the theme dropdown. Fonts are Inter (body, `--font-sans`) and Plus Jakarta Sans (headings, `--font-heading`).
+
+#### Brand palette
+
+`input.css` defines the LokiFRAK palette in `@theme` as full OKLCH ramps sampled from the logo artwork (`--color-loki-*`): `teal` (primary), `pink`, `plum`, `sky`, `sun`, `olive` (accents) and `ink` (brand-tinted neutral), plus `--color-loki-night` for the dark-mode canvas and the six raw swatches as `--color-logo-*`. **Use these tokens rather than Tailwind's `cyan`/`blue`/`purple`/`amber`/`gray`/`slate`.** The dark theme's glow utilities (`glow-teal`, `glow-pink`, `glow-plum`, `glow-sky`, `glow-sun`, `border-glow-*`, `bg-glow-teal`) are registered with `@utility` so variants like `dark:` and `dark:prose-headings:` work, and `brand-stripe` paints the six-colour logo gradient used above the header and below the content.
 
 ### Content model
 

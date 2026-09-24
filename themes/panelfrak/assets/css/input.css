@@ -9,22 +9,178 @@
 @theme {
     --font-sans: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+    /*
+     * LokiFRAK brand palette.
+     * Sampled from the logo artwork and expanded into full ramps at the same
+     * OKLCH lightness steps Tailwind uses, so relative contrast is preserved.
+     *
+     *   pink  #E8449B   teal  #2E7C7E   sun   #EFE04B
+     *   sky   #7FC8E8   olive #8B8B39   plum  #8E2A6B
+     *
+     * Prefer these tokens over Tailwind's cyan/blue/purple/amber/gray.
+     */
+
+    /* The six raw logo swatches, for gradients and decorative accents. */
+    --color-logo-pink: #e8449b;
+    --color-logo-teal: #2e7c7e;
+    --color-logo-sun: #efe04b;
+    --color-logo-sky: #7fc8e8;
+    --color-logo-olive: #8b8b39;
+    --color-logo-plum: #8e2a6b;
+
+    /* Deep teal-black canvas for dark mode. */
+    --color-loki-night: #071d1e;
+
+    /* Primary accent — the teal bar. */
+    --color-loki-teal-50: #e2fbfb;
+    --color-loki-teal-100: #c9f2f2;
+    --color-loki-teal-200: #a6e6e7;
+    --color-loki-teal-300: #7dd1d3;
+    --color-loki-teal-400: #50b2b5;
+    --color-loki-teal-500: #2d989b;
+    --color-loki-teal-600: #028183;
+    --color-loki-teal-700: #016e70;
+    --color-loki-teal-800: #015a5c;
+    --color-loki-teal-900: #014c4e;
+    --color-loki-teal-950: #003032;
+
+    /* Secondary accent — the magenta chevron. */
+    --color-loki-pink-50: #fff1f5;
+    --color-loki-pink-100: #ffdfe9;
+    --color-loki-pink-200: #ffc6d9;
+    --color-loki-pink-300: #ff9fc3;
+    --color-loki-pink-400: #ff5ba4;
+    --color-loki-pink-500: #e2398b;
+    --color-loki-pink-600: #c71574;
+    --color-loki-pink-700: #ad0263;
+    --color-loki-pink-800: #8f0151;
+    --color-loki-pink-900: #7a0144;
+    --color-loki-pink-950: #50002b;
+
+    /* Tertiary accent — the eggplant block. */
+    --color-loki-plum-50: #fff0fd;
+    --color-loki-plum-100: #ffdcfc;
+    --color-loki-plum-200: #ffc0fa;
+    --color-loki-plum-300: #f29fed;
+    --color-loki-plum-400: #d47ad0;
+    --color-loki-plum-500: #b95fb6;
+    --color-loki-plum-600: #a0489d;
+    --color-loki-plum-700: #8c3989;
+    --color-loki-plum-800: #752a73;
+    --color-loki-plum-900: #642263;
+    --color-loki-plum-950: #440d43;
+
+    /* Sky blue — the lower-left chevron. */
+    --color-loki-sky-50: #e9f8ff;
+    --color-loki-sky-100: #cdeffe;
+    --color-loki-sky-200: #aee1f8;
+    --color-loki-sky-300: #89cbe9;
+    --color-loki-sky-400: #60accc;
+    --color-loki-sky-500: #4492b2;
+    --color-loki-sky-600: #297a99;
+    --color-loki-sky-700: #1a6986;
+    --color-loki-sky-800: #095670;
+    --color-loki-sky-900: #044960;
+    --color-loki-sky-950: #002e3e;
+
+    /* Laser yellow — the upper-left bar. */
+    --color-loki-sun-50: #faf7d4;
+    --color-loki-sun-100: #f1ecb3;
+    --color-loki-sun-200: #e5dc83;
+    --color-loki-sun-300: #d1c447;
+    --color-loki-sun-400: #b1a404;
+    --color-loki-sun-500: #958a03;
+    --color-loki-sun-600: #7c7302;
+    --color-loki-sun-700: #6a6201;
+    --color-loki-sun-800: #575001;
+    --color-loki-sun-900: #4a4300;
+    --color-loki-sun-950: #2f2a00;
+
+    /* Olive — the lower bar. */
+    --color-loki-olive-50: #f6f8dd;
+    --color-loki-olive-100: #ebecc1;
+    --color-loki-olive-200: #dcdd9b;
+    --color-loki-olive-300: #c6c76f;
+    --color-loki-olive-400: #a7a742;
+    --color-loki-olive-500: #8d8d1e;
+    --color-loki-olive-600: #767502;
+    --color-loki-olive-700: #656401;
+    --color-loki-olive-800: #525201;
+    --color-loki-olive-900: #464500;
+    --color-loki-olive-950: #2c2b00;
+
+    /* Brand-tinted neutral for text, borders and surfaces. */
+    --color-loki-ink-50: #f8fbfa;
+    --color-loki-ink-100: #f1f5f5;
+    --color-loki-ink-200: #e1e9e8;
+    --color-loki-ink-300: #cbd8d7;
+    --color-loki-ink-400: #94a5a3;
+    --color-loki-ink-500: #637675;
+    --color-loki-ink-600: #435957;
+    --color-loki-ink-700: #2f4544;
+    --color-loki-ink-800: #172d2b;
+    --color-loki-ink-900: #081c1b;
+    --color-loki-ink-950: #010a09;
 }
 
 @layer base {
-    :root { color-scheme: light; }
+    :root {
+        color-scheme: light;
+        /* The six logo swatches, left to right. Drives the header/footer stripes. */
+        --brand-stripe: linear-gradient(
+            90deg,
+            var(--color-logo-pink) 0%,
+            var(--color-logo-plum) 20%,
+            var(--color-logo-teal) 40%,
+            var(--color-logo-sky) 60%,
+            var(--color-logo-olive) 80%,
+            var(--color-logo-sun) 100%
+        );
+    }
     .dark { color-scheme: dark; }
-    body { @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-cyan-50; }
+    body { @apply bg-white text-loki-ink-900 dark:bg-loki-night dark:text-loki-teal-50; }
 }
 
-@layer utilities {
-    /* Glow effect utilities for sci-fi theme */
-    .glow-cyan { text-shadow: 0 0 10px rgba(34, 211, 238, 0.8), 0 0 20px rgba(34, 211, 238, 0.4); }
-    .glow-blue { text-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4); }
-    .glow-purple { text-shadow: 0 0 10px rgba(168, 85, 247, 0.8), 0 0 20px rgba(168, 85, 247, 0.4); }
-    .border-glow-cyan { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 0 15px rgba(34, 211, 238, 0.3) inset; }
-    .border-glow-blue { border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 0 15px rgba(59, 130, 246, 0.3) inset; }
-    .bg-glow-cyan { background-color: rgba(34, 211, 238, 0.05); border-color: rgba(34, 211, 238, 0.3); }
+/* Glow utilities. Registered with @utility so variants (dark:, hover:, prose-*) work. */
+@utility glow-teal {
+    text-shadow: 0 0 10px rgba(45, 152, 155, 0.75), 0 0 20px rgba(45, 152, 155, 0.35);
+}
+
+@utility glow-pink {
+    text-shadow: 0 0 10px rgba(226, 57, 139, 0.75), 0 0 20px rgba(226, 57, 139, 0.35);
+}
+
+@utility glow-plum {
+    text-shadow: 0 0 10px rgba(185, 95, 182, 0.75), 0 0 20px rgba(185, 95, 182, 0.35);
+}
+
+@utility glow-sky {
+    text-shadow: 0 0 10px rgba(137, 203, 233, 0.75), 0 0 20px rgba(137, 203, 233, 0.35);
+}
+
+@utility glow-sun {
+    text-shadow: 0 0 10px rgba(209, 196, 71, 0.75), 0 0 20px rgba(209, 196, 71, 0.35);
+}
+
+@utility border-glow-teal {
+    border-color: rgba(45, 152, 155, 0.5);
+    box-shadow: 0 0 15px rgba(45, 152, 155, 0.3) inset;
+}
+
+@utility border-glow-pink {
+    border-color: rgba(226, 57, 139, 0.5);
+    box-shadow: 0 0 15px rgba(226, 57, 139, 0.3) inset;
+}
+
+@utility bg-glow-teal {
+    background-color: rgba(45, 152, 155, 0.05);
+    border-color: rgba(45, 152, 155, 0.3);
+}
+
+/* The six-colour logo stripe. */
+@utility brand-stripe {
+    background-image: var(--brand-stripe);
 }
 
 @layer components {
@@ -37,41 +193,86 @@
     }
 
     h3 {
-        @apply text-2xl mt-6 mb-2 font-heading dark:text-cyan-400;
+        @apply text-2xl mt-6 mb-2 font-heading dark:text-loki-teal-300;
     }
 
     h4 {
-        @apply text-xl mt-6 mb-2 font-heading dark:text-blue-400;
+        @apply text-xl mt-6 mb-2 font-heading dark:text-loki-sky-300;
     }
 
     h5 {
-        @apply text-lg mt-6 mb-2 font-heading dark:text-purple-400;
+        @apply text-lg mt-6 mb-2 font-heading dark:text-loki-plum-300;
     }
 
     h6 {
-        @apply text-base mt-6 mb-2 font-heading font-semibold dark:text-cyan-300;
+        @apply text-base mt-6 mb-2 font-heading font-semibold dark:text-loki-pink-300;
     }
 
     .title {
-        @apply text-5xl font-heading font-semibold mb-4 dark:text-cyan-300;
+        @apply text-5xl font-heading font-semibold mb-4 dark:text-loki-teal-100;
     }
 
     .dark h1,
     .dark .title {
-        text-shadow: 0 0 10px rgba(34, 211, 238, 0.8), 0 0 20px rgba(34, 211, 238, 0.4);
+        text-shadow: 0 0 10px rgba(45, 152, 155, 0.7), 0 0 20px rgba(45, 152, 155, 0.35);
     }
 
     .dark h2 {
-        text-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4);
+        text-shadow: 0 0 10px rgba(226, 57, 139, 0.65), 0 0 20px rgba(226, 57, 139, 0.3);
     }
 
-    /* Sci-fi link styling */
-    a { @apply text-blue-600 hover:text-blue-800 underline dark:text-cyan-400 dark:hover:text-cyan-300; }
+    /* Brand link styling */
+    a { @apply text-loki-teal-700 hover:text-loki-teal-900 underline decoration-loki-teal-300 dark:text-loki-teal-300 dark:hover:text-loki-teal-100 dark:decoration-loki-teal-600; }
 
-    /* Navigation sci-fi styling */
-    nav a { @apply text-gray-700 dark:text-cyan-300 no-underline hover:text-gray-900 dark:hover:text-cyan-100 transition-colors duration-200; }
+    /* Navigation */
+    nav a { @apply text-loki-ink-700 dark:text-loki-teal-200 no-underline hover:text-loki-teal-800 dark:hover:text-loki-teal-50 transition-colors duration-200; }
 
     nav a.active {
-        @apply font-semibold dark:text-cyan-400;
+        @apply font-semibold text-loki-teal-800 dark:text-loki-teal-100;
+    }
+}
+
+/*
+ * The typography plugin ships its own neutral defaults (Tailwind's gray/slate).
+ * Repoint them at the brand palette. This lives in the utilities layer so it
+ * wins over the plugin's own `--tw-prose-*` declarations.
+ */
+@layer utilities {
+    .prose {
+        --tw-prose-body: var(--color-loki-ink-700);
+        --tw-prose-headings: var(--color-loki-ink-900);
+        --tw-prose-lead: var(--color-loki-ink-600);
+        --tw-prose-links: var(--color-loki-teal-700);
+        --tw-prose-bold: var(--color-loki-ink-900);
+        --tw-prose-counters: var(--color-loki-ink-500);
+        --tw-prose-bullets: var(--color-loki-ink-300);
+        --tw-prose-hr: var(--color-loki-ink-200);
+        --tw-prose-quotes: var(--color-loki-ink-800);
+        --tw-prose-quote-borders: var(--color-loki-teal-300);
+        --tw-prose-captions: var(--color-loki-ink-500);
+        --tw-prose-kbd: var(--color-loki-ink-900);
+        --tw-prose-code: var(--color-loki-plum-700);
+        --tw-prose-pre-code: var(--color-loki-ink-100);
+        --tw-prose-pre-bg: var(--color-loki-ink-900);
+        --tw-prose-th-borders: var(--color-loki-ink-300);
+        --tw-prose-td-borders: var(--color-loki-ink-200);
+
+        --tw-prose-invert-body: var(--color-loki-ink-200);
+        --tw-prose-invert-headings: var(--color-loki-teal-100);
+        --tw-prose-invert-lead: var(--color-loki-ink-200);
+        --tw-prose-invert-links: var(--color-loki-teal-300);
+        --tw-prose-invert-bold: var(--color-loki-teal-50);
+        --tw-prose-invert-counters: var(--color-loki-ink-400);
+        --tw-prose-invert-bullets: var(--color-loki-ink-600);
+        --tw-prose-invert-hr: var(--color-loki-ink-700);
+        --tw-prose-invert-quotes: var(--color-loki-ink-100);
+        --tw-prose-invert-quote-borders: var(--color-loki-teal-700);
+        --tw-prose-invert-captions: var(--color-loki-ink-400);
+        --tw-prose-invert-kbd: var(--color-loki-teal-100);
+        --tw-prose-invert-code: var(--color-loki-plum-300);
+        --tw-prose-invert-pre-code: var(--color-loki-teal-50);
+        --tw-prose-invert-pre-bg: var(--color-loki-ink-950);
+        --tw-prose-invert-th-borders: var(--color-loki-ink-700);
+        --tw-prose-invert-td-borders: var(--color-loki-ink-800);
     }
 }

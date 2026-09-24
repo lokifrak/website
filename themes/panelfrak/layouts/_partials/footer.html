@@ -1,26 +1,27 @@
-<footer class="px-4 sm:px-0 py-4 mt-4 border-t dark:border-t-cyan-400/30 dark:border-t-2">
+<div class="h-1 w-full brand-stripe mt-12" aria-hidden="true"></div>
+<footer class="px-4 sm:px-0 py-6">
     <div class="container mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4 sm:gap-0">
         <div>
-            <p class="dark:text-cyan-50">&copy; {{ now.Year }} {{ .Site.Params.owner }}. All rights reserved.</p>
-            <p class="text-sm dark:text-cyan-300">Built with <a href="http://gohugo.io" target="_blank" rel="noopener noreferrer" class="dark:text-cyan-400 dark:hover:text-cyan-200">Hugo</a> and <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="dark:text-cyan-400 dark:hover:text-cyan-200">Tailwind CSS</a></p>
-            <p class="text-sm dark:text-cyan-300">Unless otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" class="dark:text-cyan-400 dark:hover:text-cyan-200">Creative Commons Attribution-ShareAlike 4.0 International License</a></p>
-            <p class="text-sm dark:text-cyan-300">All published works, artwork, and characters are copyrighted by their respective rights holders and are not covered by the above license. All rights reserved</p>
+            <p class="dark:text-loki-teal-50">&copy; {{ now.Year }} {{ .Site.Params.owner }}. All rights reserved.</p>
+            <p class="text-sm dark:text-loki-teal-200">Built with <a href="http://gohugo.io" target="_blank" rel="noopener noreferrer" class="dark:text-loki-teal-300 dark:hover:text-loki-teal-100">Hugo</a> and <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="dark:text-loki-teal-300 dark:hover:text-loki-teal-100">Tailwind CSS</a></p>
+            <p class="text-sm dark:text-loki-teal-200">Unless otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" class="dark:text-loki-teal-300 dark:hover:text-loki-teal-100">Creative Commons Attribution-ShareAlike 4.0 International License</a></p>
+            <p class="text-sm dark:text-loki-teal-200">All published works, artwork, and characters are copyrighted by their respective rights holders and are not covered by the above license. All rights reserved</p>
         </div>
         <div class="flex flex-col sm:flex-row gap-4 items-center">
             {{ with .Site.Params.social }}
             <div class="flex gap-4">
                 {{ with .facebook }}
-                <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-gray-700 dark:text-cyan-400 dark:hover:text-cyan-200 hover:text-black transition-colors duration-200">
+                <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-loki-ink-700 dark:text-loki-teal-300 dark:hover:text-loki-teal-100 hover:text-loki-teal-800 transition-colors duration-200">
                     <span class="fa-brands fa-facebook text-xl"></span>
                 </a>
                 {{ end }}
                 {{ with .instagram }}
-                <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-700 dark:text-cyan-400 dark:hover:text-cyan-200 hover:text-black transition-colors duration-200">
+                <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-loki-ink-700 dark:text-loki-pink-300 dark:hover:text-loki-pink-100 hover:text-loki-pink-800 transition-colors duration-200">
                     <span class="fa-brands fa-instagram text-xl"></span>
                 </a>
                 {{ end }}
                 {{ with .x }}
-                <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="X" class="text-gray-700 dark:text-cyan-400 dark:hover:text-cyan-200 hover:text-black transition-colors duration-200">
+                <a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="X" class="text-loki-ink-700 dark:text-loki-sky-300 dark:hover:text-loki-sky-100 hover:text-loki-sky-800 transition-colors duration-200">
                     <span class="fa-brands fa-x-twitter text-xl"></span>
                 </a>
                 {{ end }}

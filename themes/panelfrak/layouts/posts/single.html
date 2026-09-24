@@ -1,8 +1,8 @@
 {{ define "main" }}
-<article class="container mx-auto px-4 py-8 prose dark:prose-invert dark:prose-headings:text-cyan-300 dark:prose-headings:glow-cyan dark:prose-a:text-cyan-400 dark:prose-a:hover:text-cyan-300 dark:prose-code:text-purple-300 dark:prose-code:bg-purple-900/20 dark:prose-pre:bg-gray-900/50 dark:prose-pre:border dark:prose-pre:border-cyan-400/20 dark:prose-strong:text-cyan-200 dark:prose-em:text-blue-300 dark:prose-hr:border-cyan-400/30 max-w-4xl">
+<article class="container mx-auto px-4 py-8 prose dark:prose-invert prose-a:text-loki-teal-700 prose-a:hover:text-loki-teal-900 dark:prose-headings:text-loki-teal-200 dark:prose-headings:glow-teal dark:prose-a:text-loki-teal-300 dark:prose-a:hover:text-loki-teal-100 dark:prose-code:text-loki-plum-300 dark:prose-code:bg-loki-plum-900/20 dark:prose-pre:bg-loki-ink-950/60 dark:prose-pre:border dark:prose-pre:border-loki-teal-400/20 dark:prose-strong:text-loki-teal-100 dark:prose-em:text-loki-sky-300 dark:prose-hr:border-loki-teal-400/30 max-w-4xl">
     <header class="mb-8 not-prose">
-        <h1 class="text-4xl font-bold mb-4 text-slate-900 dark:text-cyan-300 dark:glow-cyan">{{ .Title }}</h1>
-        <div class="flex flex-wrap items-center gap-4 text-sm text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-cyan-900/30 pb-4">
+        <h1 class="text-4xl font-bold mb-4 text-loki-ink-900 dark:text-loki-teal-100 dark:glow-teal">{{ .Title }}</h1>
+        <div class="flex flex-wrap items-center gap-4 text-sm text-loki-ink-600 dark:text-loki-ink-300 border-b border-loki-ink-200 dark:border-loki-teal-900/40 pb-4">
             <div class="flex items-center">
                 <span>{{ .Date.Format "January 2, 2006" }}</span>
             </div>
@@ -14,7 +14,7 @@
             {{ with .Params.categories }}
             <div class="flex gap-2">
                 {{ range . }}
-                <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}" class="px-2 py-0.5 rounded bg-slate-100 dark:bg-cyan-900/20 text-slate-700 dark:text-cyan-300 hover:bg-slate-200 dark:hover:bg-cyan-900/40 transition-colors">
+                <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}" class="px-2 py-0.5 rounded bg-loki-sky-100 dark:bg-loki-sky-900/20 text-loki-sky-900 dark:text-loki-sky-200 hover:bg-loki-sky-200 dark:hover:bg-loki-sky-900/40 transition-colors">
                     {{ . }}
                 </a>
                 {{ end }}
@@ -27,11 +27,11 @@
         {{ .Content }}
     </div>
 
-    <footer class="mt-12 pt-8 border-t border-slate-200 dark:border-cyan-900/30 not-prose">
+    <footer class="mt-12 pt-8 border-t border-loki-ink-200 dark:border-loki-teal-900/40 not-prose">
         {{ with .Params.tags }}
         <div class="flex flex-wrap gap-2 mb-6">
             {{ range . }}
-            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="text-sm px-3 py-1 rounded-full border border-slate-200 dark:border-cyan-900/50 text-slate-600 dark:text-slate-400 hover:border-cyan-500 dark:hover:border-cyan-500 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors">
+            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="text-sm px-3 py-1 rounded-full border border-loki-ink-200 dark:border-loki-plum-900/50 text-loki-ink-600 dark:text-loki-ink-300 hover:border-loki-plum-500 dark:hover:border-loki-plum-400 hover:text-loki-plum-700 dark:hover:text-loki-plum-200 transition-colors">
                 #{{ . }}
             </a>
             {{ end }}

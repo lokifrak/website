@@ -1,7 +1,7 @@
 {{ define "main" }}
 <div class="container mx-auto px-4 pt-12 pb-8 max-w-5xl">
   <header class="mb-12 text-center">
-    <h1 class="text-4xl font-bold mb-4 text-slate-900 dark:text-cyan-300 dark:glow-cyan">{{ .Title }}</h1>
+    <h1 class="text-4xl font-bold mb-4 text-loki-ink-900 dark:text-loki-teal-100 dark:glow-teal">{{ .Title }}</h1>
     {{ with .Content }}
     <div class="prose dark:prose-invert mx-auto">
       {{ . }}
@@ -12,15 +12,15 @@
   <div class="space-y-8">
     {{ $paginator := .Paginator }}
     {{ range $paginator.Pages }}
-      <article class="bg-white dark:bg-gray-900/40 pb-6 px-6 rounded-lg border border-gray-200 dark:border-cyan-900/30 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-        <div class="absolute inset-0 bg-linear-to-r from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+      <article class="bg-white dark:bg-loki-ink-900/40 pb-6 px-6 rounded-lg border border-loki-ink-200 dark:border-loki-teal-900/40 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div class="absolute inset-0 bg-linear-to-r from-loki-teal-500/5 to-loki-plum-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
         <header class="mb-4 relative z-10">
           <h2 class="text-2xl font-bold mb-2">
-            <a href="{{ .RelPermalink }}" class="text-slate-900 dark:text-cyan-400 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors">
+            <a href="{{ .RelPermalink }}" class="text-loki-ink-900 dark:text-loki-teal-300 hover:text-loki-pink-700 dark:hover:text-loki-pink-200 transition-colors">
               {{ .Title }}
             </a>
           </h2>
-          <div class="text-sm text-slate-500 dark:text-slate-400 mb-2">
+          <div class="text-sm text-loki-ink-500 dark:text-loki-ink-300 mb-2">
             <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
               {{ .Date.Format "January 2, 2006" }}
             </time>
@@ -29,17 +29,17 @@
           <div class="flex gap-2 text-xs mb-2">
             <span>Category: </span>
             {{ range . }}
-              <span class="text-slate-500 dark:text-slate-500">{{ . }}</span>
+              <span class="text-loki-sky-700 dark:text-loki-sky-300">{{ . }}</span>
             {{ end }}
           </div>
           {{ end }}
         </header>
         
-        <div class="prose dark:prose-invert dark:prose-p:text-slate-300 mb-4 line-clamp-3 relative z-10">
+        <div class="prose dark:prose-invert dark:prose-p:text-loki-ink-200 mb-4 line-clamp-3 relative z-10">
           {{ .Summary }}
         </div>
         
-        <a href="{{ .RelPermalink }}" class="inline-flex items-center text-sm font-semibold text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-200 relative z-10">
+        <a href="{{ .RelPermalink }}" class="inline-flex items-center text-sm font-semibold text-loki-pink-700 dark:text-loki-pink-300 hover:text-loki-pink-900 dark:hover:text-loki-pink-100 relative z-10">
           Read Article <span class="ml-1">&rarr;</span>
         </a>
       </article>
@@ -49,15 +49,15 @@
   {{ if gt $paginator.TotalPages 1 }}
   <nav class="mt-12 flex justify-center gap-2">
     {{ if $paginator.HasPrev }}
-    <a href="{{ $paginator.Prev.URL }}" class="px-4 py-2 rounded border border-slate-200 dark:border-cyan-900/50 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-cyan-900/20 transition-colors">
+    <a href="{{ $paginator.Prev.URL }}" class="px-4 py-2 rounded border border-loki-ink-200 dark:border-loki-teal-900/50 text-loki-ink-600 dark:text-loki-ink-300 hover:bg-loki-ink-100 dark:hover:bg-loki-teal-900/20 transition-colors">
       Previous
     </a>
     {{ end }}
-    <span class="px-4 py-2 text-slate-500 dark:text-slate-500">
+    <span class="px-4 py-2 text-loki-ink-500 dark:text-loki-ink-400">
       Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}
     </span>
     {{ if $paginator.HasNext }}
-    <a href="{{ $paginator.Next.URL }}" class="px-4 py-2 rounded border border-slate-200 dark:border-cyan-900/50 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-cyan-900/20 transition-colors">
+    <a href="{{ $paginator.Next.URL }}" class="px-4 py-2 rounded border border-loki-ink-200 dark:border-loki-teal-900/50 text-loki-ink-600 dark:text-loki-ink-300 hover:bg-loki-ink-100 dark:hover:bg-loki-teal-900/20 transition-colors">
       Next
     </a>
     {{ end }}
