@@ -4,7 +4,7 @@
         <div class="space-y-6">
             <header class="space-y-2">
                 {{ with .Date }}
-                <p class="text-sm font-semibold uppercase tracking-wide text-loki-pink-700 dark:text-loki-pink-300">Release date · {{ .Format "02 January 2006" }}</p>
+                <p class="text-sm font-semibold uppercase tracking-wide text-loki-sun-700 dark:text-loki-sun-300">Release date · {{ .Format "02 January 2006" }}</p>
                 {{ end }}
                 <h1 class="title text-4xl leading-tight">{{ .Title }}</h1>
             </header>
@@ -107,11 +107,11 @@
                 <h2 class="text-sm font-semibold uppercase tracking-wide text-loki-ink-600 dark:text-loki-ink-300">Genres</h2>
                 <div class="flex flex-wrap gap-2">
                     {{ range $genreTerms }}
-                    <a class="rounded-full border border-loki-pink-300 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-loki-pink-900 transition hover:-translate-y-0.5 hover:border-loki-pink-500 hover:text-loki-pink-700 dark:border-loki-pink-400/30 dark:text-loki-pink-200 dark:hover:border-loki-pink-300 dark:hover:text-loki-pink-100" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                    <a class="rounded-full border border-loki-sun-300 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-loki-sun-900 transition hover:-translate-y-0.5 hover:border-loki-sun-500 hover:text-loki-sun-700 dark:border-loki-sun-400/30 dark:text-loki-sun-200 dark:hover:border-loki-sun-300 dark:hover:text-loki-sun-100" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
                     {{ end }}
                     {{ if not $genreTerms }}
                         {{ range $genreParamsPlural }}
-                        <a class="rounded-full border border-loki-pink-300 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-loki-pink-900 transition hover:-translate-y-0.5 hover:border-loki-pink-500 hover:text-loki-pink-700 dark:border-loki-pink-400/30 dark:text-loki-pink-200 dark:hover:border-loki-pink-300 dark:hover:text-loki-pink-100" href="{{ printf "/genres/%s/" (urlize .) | relURL }}">{{ . }}</a>
+                        <a class="rounded-full border border-loki-sun-300 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-loki-sun-900 transition hover:-translate-y-0.5 hover:border-loki-sun-500 hover:text-loki-sun-700 dark:border-loki-sun-400/30 dark:text-loki-sun-200 dark:hover:border-loki-sun-300 dark:hover:text-loki-sun-100" href="{{ printf "/genres/%s/" (urlize .) | relURL }}">{{ . }}</a>
                         {{ end }}
                     {{ end }}
                 </div>
@@ -234,7 +234,7 @@
                 <div class="grid gap-2">
                     {{ range . }}
                     {{ if and .ref .link }}
-                    <a class="inline-flex items-center justify-between rounded-lg bg-loki-pink-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-loki-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-loki-pink-500" href="{{ .link }}" target="_blank" rel="noopener">{{ .ref }}<span aria-hidden="true">↗</span></a>
+                    <a class="inline-flex items-center justify-between rounded-lg bg-logo-sun px-4 py-2 text-sm font-semibold text-loki-ink-900 transition hover:bg-loki-sun-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-loki-ink-900" href="{{ .link }}" target="_blank" rel="noopener">{{ .ref }}<span aria-hidden="true">↗</span></a>
                     {{ end }}
                     {{ end }}
                 </div>

@@ -38,7 +38,7 @@
                         {{ with .Params.genres }}
                         <span class="flex flex-wrap gap-2">
                             {{ range . }}
-                            <a class="rounded-full border border-loki-pink-300 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-loki-pink-800 transition hover:border-loki-pink-500 dark:border-loki-pink-400/40 dark:text-loki-pink-200 dark:hover:border-loki-pink-300" href="{{ printf "/genres/%s/" (urlize .) | relURL }}">{{ . }}</a>
+                            <a class="rounded-full border border-loki-sun-300 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-loki-sun-800 transition hover:border-loki-sun-500 dark:border-loki-sun-400/40 dark:text-loki-sun-200 dark:hover:border-loki-sun-300" href="{{ printf "/genres/%s/" (urlize .) | relURL }}">{{ . }}</a>
                             {{ end }}
                         </span>
                         {{ end }}
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="mt-auto">
-                        <a class="inline-flex items-center gap-2 font-semibold text-loki-pink-700 transition hover:gap-3 hover:text-loki-pink-900 dark:text-loki-pink-300 dark:hover:text-loki-pink-100" href="{{ .RelPermalink }}">
+                        <a class="inline-flex items-center gap-2 font-semibold text-loki-sun-700 transition hover:gap-3 hover:text-loki-sun-900 dark:text-loki-sun-300 dark:hover:text-loki-sun-100" href="{{ .RelPermalink }}">
                             See details
                             <span aria-hidden="true">→</span>
                         </a>
