@@ -57,7 +57,7 @@ collections:
         widget: datetime
         required: true
         default: now
-        format: 'DD MMMM YYYY'
+        format: 'DD MMM YYYY'
         time_format: false
       - {label: Draft, name: draft, widget: boolean, default: false}
       - label: Series
