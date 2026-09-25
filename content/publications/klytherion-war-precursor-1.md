@@ -18,6 +18,7 @@ genres:
   - Science Fiction
   - Superhero
   - Coming-of-Age
+  - Mystery
 print_isbn: N/A
 ebook_isbn: N/A
 publisher: PT Lokakarya Kreativitas Indonesia FRAK
