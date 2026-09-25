@@ -17,7 +17,6 @@ image: /uploads/Klytherion War Precursor 1 cover.png
 genres:
   - Science Fiction
   - Superhero
-  - Coming-of-Age
   - Mystery
 print_isbn: N/A
 ebook_isbn: N/A
