@@ -1,6 +1,6 @@
 ---
 title: 'Klytherion War: Precursor 1'
-date: 27 September 2026
+date: 27 Sep 2026
 draft: false
 series:
   - 'Klytherion War: Precursorr'
