@@ -43,6 +43,21 @@ build:
     - source: (postcss|tailwind)\.config\.js
       target: css
 
+# Hugo >= 0.166 no longer whitelists the Tailwind CLI by default, so the
+# css.TailwindCSS pipe fails with:
+#   access denied: "tailwindcss" is not whitelisted in policy "security.exec.allow"
+# This is a superset of the defaults, so it is safe on older Hugo (e.g. 0.164 in CI).
+security:
+  exec:
+    allow:
+      - ^(dart-)?sass(-embedded)?$
+      - ^go$
+      - ^git$
+      - ^node$
+      - ^npx$
+      - ^postcss$
+      - ^tailwindcss$
+
 module:
   mounts:
     - source: assets

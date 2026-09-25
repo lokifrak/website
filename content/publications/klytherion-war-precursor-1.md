@@ -1,9 +1,9 @@
 ---
 title: 'Klytherion War: Precursor 1'
-date: 27 Sep 2026
+date: 25 Sep 2026
 draft: false
 series:
-  - 'Klytherion War: Precursorr'
+  - 'Klytherion War: Precursor'
 authors:
   - Gibran Alfaro
   - Qilean
