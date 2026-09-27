@@ -23,7 +23,7 @@ ebook_isbn: N/A
 publisher: PT Lokakarya Kreativitas Indonesia FRAK
 pub_city: Jakarta
 pub_year: '2026'
-pages: 15
+pages: 20
 language: English
 formats:
   - Print
