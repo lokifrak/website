@@ -18,8 +18,8 @@ genres:
   - Science Fiction
   - Superhero
   - Mystery
-print_isbn: N/A
-ebook_isbn: N/A
+print_isbn: In process
+ebook_isbn: In process
 publisher: PT Lokakarya Kreativitas Indonesia FRAK
 pub_city: Jakarta
 pub_year: '2026'
