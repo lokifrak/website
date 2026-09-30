@@ -17,7 +17,6 @@ image: /uploads/Klytherion War Precursor 1 cover.png
 genres:
   - Science Fiction
   - Superhero
-  - Mystery
 print_isbn: In process
 ebook_isbn: In process
 publisher: PT Lokakarya Kreativitas Indonesia FRAK
