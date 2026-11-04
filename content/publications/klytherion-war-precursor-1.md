@@ -17,8 +17,8 @@ image: /uploads/Klytherion War Precursor 1 cover.png
 genres:
   - Science Fiction
   - Superhero
-print_isbn: In process
-ebook_isbn: In process
+print_isbn: 978-634-05-8134-8
+ebook_isbn: 978-634-05-8050-1
 publisher: PT Lokakarya Kreativitas Indonesia FRAK
 pub_city: Jakarta
 pub_year: '2026'
