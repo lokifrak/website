@@ -15,7 +15,7 @@ genres:
   - Thriller
   - Technothriller
 print_isbn: In process
-ebook_isbn: In process
+ebook_isbn: N/A
 publisher: PT Lokakarya Kreativitas Indonesia FRAK
 pub_city: Jakarta
 pub_year: '2026'
@@ -23,7 +23,6 @@ pages: 304
 language: English
 formats:
   - Print
-  - EPUB eBook
 print_mrp_java: TBD
 ebook_mrp: TBD
 physical:
