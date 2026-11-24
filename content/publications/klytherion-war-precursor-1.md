@@ -33,7 +33,11 @@ physical:
   bind: stapled
   paper: B5 100gsm paper
   print: color
-links: []
+links:
+  - ref: Physical version (preorder, Indonesia only)
+    link: https://lynk.id/lokifrak/l9kj8v819514
+  - ref: Ebook version
+    link: https://lynk.id/lokifrak/11r9o053105w
 ---
 
 Far out on the edge of the Milky Way, people come to the frontier to disappear.
