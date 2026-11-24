@@ -27,8 +27,8 @@ language: English
 formats:
   - Print
   - PDF eBook
-print_mrp_java: Rp60,000
-ebook_mrp: Rp35,000
+print_mrp_java: Rp95,000
+ebook_mrp: Rp45,000
 physical:
   bind: stapled
   paper: B5 100gsm paper
